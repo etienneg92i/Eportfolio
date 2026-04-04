@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profil.nom }} - ePortfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <h1>{{ profil.nom }}</h1>
+            <h2>{{ profil.titre }}</h2>
+            <p>{{ profil.presentation }}</p>
+        </header>
+
+        <section class="card">
+            <h3>Mes competences</h3>
+            <ul>
+                {% for competence in competences %}
+                <li>{{ competence }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="card">
+            <h3>Ajouter un projet</h3>
+            <form method="post" action="/projets" class="project-form">
+                <input type="text" name="titre" placeholder="Titre" required>
+                <textarea name="description" placeholder="Description" required></textarea>
+                <button type="submit">Ajouter</button>
+            </form>
+        </section>
+
+        <section class="card">
+            <h3>Mes projets</h3>
+            {% for projet in projets %}
+            <div class="project">
+                <h4>{{ projet.titre }}</h4>
+                <p>{{ projet.description }}</p>
+                <form method="post" action="/projets/{{ projet.id }}/supprimer">
+                    <button type="submit" class="delete-btn">Supprimer</button>
+                </form>
+            </div>
+            {% else %}
+            <p>Aucun projet pour le moment.</p>
+            {% endfor %}
+        </section>
+    </div>
+</body>
+</html>

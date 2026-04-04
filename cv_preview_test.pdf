@@ -1,0 +1,97 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R /F3 7 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 4881 >>
+stream
+1.000 1.000 1.000 rg 0 0 595 842 re f
+0.949 0.929 0.898 rg 0 0 180 842 re f
+0.749 0.357 0.173 rg 180 706 415 136 re f
+0.749 0.357 0.173 rg 180 0 415 18 re f
+BT /F2 26 Tf 1.000 1.000 1.000 rg 1 0 0 1 205 778 Tm (Etienne Girard) Tj ET
+BT /F1 13 Tf 1.000 1.000 1.000 rg 1 0 0 1 205 748 Tm (Etudiant en Data/IA a l'EPF) Tj ET
+BT /F2 11 Tf 0.486 0.192 0.067 rg 1 0 0 1 22 780 Tm (CONTACT) Tj ET
+1.00 w 0.882 0.835 0.780 RG 22 770 m 150 770 l S
+BT /F1 10 Tf 0.118 0.102 0.090 rg 1 0 0 1 22 752 Tm (etienne.girard1@epfedu.fr) Tj ET
+BT /F1 10 Tf 0.118 0.102 0.090 rg 1 0 0 1 22 736 Tm (+33 6 00 00 00 00) Tj ET
+BT /F1 10 Tf 0.118 0.102 0.090 rg 1 0 0 1 22 720 Tm (Paris, France) Tj ET
+BT /F1 10 Tf 0.118 0.102 0.090 rg 1 0 0 1 22 704 Tm (https://www.linkedin.com/in/etienne-girard-207a95281/?skipRedirect=true) Tj ET
+BT /F1 10 Tf 0.118 0.102 0.090 rg 1 0 0 1 22 688 Tm (https://github.com/etienneg92i) Tj ET
+BT /F2 11 Tf 0.486 0.192 0.067 rg 1 0 0 1 22 664 Tm (COMPETENCES) Tj ET
+1.00 w 0.882 0.835 0.780 RG 22 654 m 150 654 l S
+BT /F2 10 Tf 0.118 0.102 0.090 rg 1 0 0 1 22 636 Tm (Langages) Tj ET
+BT /F1 9 Tf 0.365 0.329 0.286 rg 1 0 0 1 22 622 Tm (Python, SQL, R) Tj ET
+BT /F2 10 Tf 0.118 0.102 0.090 rg 1 0 0 1 22 602 Tm (Data Manipulation et Visualisation) Tj ET
+BT /F1 9 Tf 0.365 0.329 0.286 rg 1 0 0 1 22 588 Tm (Pandas, NumPy, Matplotlib) Tj ET
+BT /F2 10 Tf 0.118 0.102 0.090 rg 1 0 0 1 22 568 Tm (Outils) Tj ET
+BT /F1 9 Tf 0.365 0.329 0.286 rg 1 0 0 1 22 554 Tm (Git, Docker, FastAPI) Tj ET
+BT /F2 12 Tf 0.486 0.192 0.067 rg 1 0 0 1 205 676 Tm (PROFIL) Tj ET
+1.20 w 0.882 0.835 0.780 RG 205 670 m 560 670 l S
+BT /F1 10 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 650 Tm (Actuellement en 4eme annee a l'EPF, je suis a la recherche d'une) Tj ET
+BT /F1 10 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 635 Tm (alternance en Data/IA pour la rentree 2026. Passionne par les) Tj ET
+BT /F1 10 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 620 Tm (donnees et l'intelligence artificielle, je suis motive a apprendre) Tj ET
+BT /F1 10 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 605 Tm (et a contribuer a des projets innovants dans ce domaine.) Tj ET
+BT /F2 12 Tf 0.486 0.192 0.067 rg 1 0 0 1 205 582 Tm (EXPERIENCES) Tj ET
+1.20 w 0.882 0.835 0.780 RG 205 576 m 560 576 l S
+BT /F2 11 Tf 0.118 0.102 0.090 rg 1 0 0 1 205 556 Tm (Animateur - Federation Francaise de Football) Tj ET
+BT /F3 9 Tf 0.365 0.329 0.286 rg 1 0 0 1 470 556 Tm (Juillet - Aout 2024) Tj ET
+BT /F1 10 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 540 Tm (Animation d'ateliers de football pour les jeunes, organisation) Tj ET
+BT /F1 10 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 526 Tm (d'evenements sportifs et promotion du sport dans plusieurs villes) Tj ET
+BT /F1 10 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 512 Tm (de France.) Tj ET
+BT /F2 11 Tf 0.118 0.102 0.090 rg 1 0 0 1 205 488 Tm (Vente et relation client - Saint-Ouen) Tj ET
+BT /F3 9 Tf 0.365 0.329 0.286 rg 1 0 0 1 470 488 Tm (2018 - 2020) Tj ET
+BT /F1 10 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 472 Tm (Accueil, vente et gestion de la relation clientele.) Tj ET
+BT /F2 12 Tf 0.486 0.192 0.067 rg 1 0 0 1 205 448 Tm (PROJETS) Tj ET
+1.20 w 0.882 0.835 0.780 RG 205 442 m 560 442 l S
+BT /F2 11 Tf 0.118 0.102 0.090 rg 1 0 0 1 205 422 Tm (Projet Biere) Tj ET
+BT /F1 9 Tf 0.486 0.192 0.067 rg 1 0 0 1 205 422 Tm (Python, Pandas, NumPy) Tj ET
+BT /F1 10 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 410 Tm (Application Python permettant d'estimer un taux d'alcoolemie en) Tj ET
+BT /F1 10 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 396 Tm (fonction de la consommation de biere.) Tj ET
+BT /F1 9 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 382 Tm (https://github.com/etienneg92i/beers) Tj ET
+BT /F2 11 Tf 0.118 0.102 0.090 rg 1 0 0 1 205 362 Tm (Portfolio Web) Tj ET
+BT /F1 9 Tf 0.486 0.192 0.067 rg 1 0 0 1 205 362 Tm (Python, FastAPI, HTML/CSS) Tj ET
+BT /F1 10 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 350 Tm (Creation d'un portfolio avec FastAPI pour presenter mes) Tj ET
+BT /F1 10 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 336 Tm (competences et mes projets.) Tj ET
+BT /F1 9 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 322 Tm (https://github.com/etienneg92i/portfolio) Tj ET
+BT /F2 11 Tf 0.118 0.102 0.090 rg 1 0 0 1 205 302 Tm (Analyse de donnees de vente) Tj ET
+BT /F1 9 Tf 0.486 0.192 0.067 rg 1 0 0 1 205 302 Tm (Python, Pandas, Matplotlib) Tj ET
+BT /F1 10 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 290 Tm (Analyse de donnees de vente pour identifier des tendances et) Tj ET
+BT /F1 10 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 276 Tm (proposer des pistes d'amelioration.) Tj ET
+BT /F2 12 Tf 0.486 0.192 0.067 rg 1 0 0 1 205 254 Tm (FORMATION) Tj ET
+1.20 w 0.882 0.835 0.780 RG 205 248 m 560 248 l S
+BT /F2 11 Tf 0.118 0.102 0.090 rg 1 0 0 1 205 228 Tm (Cycle ingenieur - Data / IA - EPF) Tj ET
+BT /F3 9 Tf 0.365 0.329 0.286 rg 1 0 0 1 470 228 Tm (2022 - 2027) Tj ET
+BT /F1 10 Tf 0.365 0.329 0.286 rg 1 0 0 1 205 212 Tm (Formation orientee data science, developpement et IA.) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+7 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000261 00000 n 
+0000005194 00000 n 
+0000005264 00000 n 
+0000005339 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+5417
+%%EOF
