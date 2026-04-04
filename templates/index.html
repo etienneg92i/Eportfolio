@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ profil.nom }} - ePortfolio</title>
-    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}?v={{ css_version }}">
 </head>
+
 <body>
     <div class="container">
         <header class="hero">
@@ -23,6 +25,7 @@
             </ul>
         </section>
 
+        {% if is_admin %}
         <section class="card">
             <h3>Ajouter un projet</h3>
             <form method="post" action="/projets" class="project-form">
@@ -31,6 +34,7 @@
                 <button type="submit">Ajouter</button>
             </form>
         </section>
+        {% endif %}
 
         <section class="card">
             <h3>Mes projets</h3>
@@ -38,14 +42,92 @@
             <div class="project">
                 <h4>{{ projet.titre }}</h4>
                 <p>{{ projet.description }}</p>
+                {% if is_admin %}
                 <form method="post" action="/projets/{{ projet.id }}/supprimer">
                     <button type="submit" class="delete-btn">Supprimer</button>
                 </form>
+                {% endif %}
             </div>
             {% else %}
             <p>Aucun projet pour le moment.</p>
             {% endfor %}
         </section>
+
+        {% if is_admin %}
+        <section class="card">
+            <h3>Ajouter une experience professionnelle</h3>
+            <form method="post" action="/experiences" class="project-form">
+                <input type="text" name="titre" placeholder="Titre" required>
+                <textarea name="description" placeholder="Description" required></textarea>
+                <button type="submit">Ajouter</button>
+            </form>
+        </section>
+        {% endif %}
+
+        <section class="card">
+            <h3>Mes experiences professionnelles</h3>
+            {% for experience in experiences %}
+            <div class="project">
+                <h4>{{ experience.titre }}</h4>
+                <p>{{ experience.description }}</p>
+                {% if is_admin %}
+                <form method="post" action="/experiences/{{ experience.id }}/supprimer">
+                    <button type="submit" class="delete-btn">Supprimer</button>
+                </form>
+                {% endif %}
+            </div>
+            {% else %}
+            <p>Aucune experience pour le moment.</p>
+            {% endfor %}
+        </section>
+
+        {% if is_admin %}
+        <section class="card">
+            <h3>Ajouter une formation</h3>
+            <form method="post" action="/formations" class="project-form">
+                <input type="text" name="titre" placeholder="Titre" required>
+                <textarea name="description" placeholder="Description" required></textarea>
+                <button type="submit">Ajouter</button>
+            </form>
+        </section>
+        {% endif %}
+
+        <section class="card">
+            <h3>Mes formations</h3>
+            {% for formation in formations %}
+            <div class="project">
+                <h4>{{ formation.titre }}</h4>
+                <p>{{ formation.description }}</p>
+                {% if is_admin %}
+                <form method="post" action="/formations/{{ formation.id }}/supprimer">
+                    <button type="submit" class="delete-btn">Supprimer</button>
+                </form>
+                {% endif %}
+            </div>
+            {% else %}
+            <p>Aucune formation pour le moment.</p>
+            {% endfor %}
+        </section>
+
+        <section class="card">
+            <h3>Administration</h3>
+            {% if is_admin %}
+            <p>Le contenu peut etre modifie.</p>
+            <form method="post" action="/logout">
+                <button type="submit" class="delete-btn">Se deconnecter</button>
+            </form>
+            {% else %}
+            <p>Se connecter pour modifier les contenus.</p>
+            {% if auth_error %}
+            <p>Mot de passe incorrect.</p>
+            {% endif %}
+            <form method="post" action="/login" class="project-form">
+                <input type="password" name="password" placeholder="Mot de passe admin" required>
+                <button type="submit">Se connecter</button>
+            </form>
+            {% endif %}
+        </section>
     </div>
 </body>
+
 </html>
