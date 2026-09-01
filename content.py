@@ -7,13 +7,13 @@ mettre a jour le contenu. Aucune base de donnees, aucun mode admin.
 profil = {
     "nom": "Etienne Girard",
     "titre": "Étudiant ingénieur — Majeure Data & IA",
-    "accroche": "En recherche d'alternance · août 2026 – août 2027",
+    "accroche": "Alternant Data · service Finance chez Décathlon",
     "presentation": (
         "Étudiant ingénieur à l'EPF, spécialisé en Data et Intelligence "
-        "Artificielle. Fort intérêt pour l'analyse de données, la programmation "
-        "et les projets industriels. Sérieux, motivé et adaptable, je souhaite "
-        "contribuer à des projets d'ingénierie concrets tout en poursuivant ma "
-        "formation."
+        "Artificielle, actuellement en alternance dans le service Finance de "
+        "Décathlon. Fort intérêt pour l'analyse de données, la programmation et "
+        "les projets à impact concret. Sérieux, motivé et adaptable, je mets la "
+        "data au service de la décision."
     ),
     "email": "etienne.p.girard@gmail.com",
     "telephone": "",
@@ -89,6 +89,17 @@ projets = [
 ]
 
 experiences = [
+    {
+        "titre": "Alternant Data — service Finance",
+        "organisation": "Décathlon",
+        "lieu": "",
+        "periode": "depuis 2026",
+        "description": (
+            "Analyse et valorisation de données financières : automatisation de "
+            "reportings, indicateurs de pilotage et outils d'aide à la décision "
+            "pour les équipes Finance."
+        ),
+    },
     {
         "titre": "Événementiel — FFF Tour",
         "organisation": "Fédération Française de Football",
