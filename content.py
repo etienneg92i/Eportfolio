@@ -16,7 +16,7 @@ profil = {
         "formation."
     ),
     "email": "etienne.p.girard@gmail.com",
-    "telephone": "+33 6 95 15 98 53",
+    "telephone": "",
     "localisation": "Paris, France",
     "github": "https://github.com/etienneg92i",
     "linkedin": "",
