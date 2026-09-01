@@ -202,6 +202,19 @@ section { padding-block: 72px; }
 
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
 
+.hero .badge {
+    display: inline-block;
+    background: rgba(147, 197, 253, .14);
+    border: 1px solid rgba(147, 197, 253, .35);
+    color: #bfdbfe;
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+}
+
 /* ===== Cards / grids ===== */
 .card {
     background: var(--paper);
@@ -213,7 +226,55 @@ section { padding-block: 72px; }
 
 .alt { background: var(--paper); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 
+.mini-title {
+    margin: 0 0 14px;
+    font-size: .82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+}
+
+.muted { color: var(--muted); }
+
+/* About */
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.lang-list, .bullet-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+
+.lang-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+}
+.lang-list li:last-child { border-bottom: none; padding-bottom: 0; }
+
+.bullet-list li { position: relative; padding-left: 18px; }
+.bullet-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .62em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
 /* Skills */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
 .chips { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 0; list-style: none; }
 
 .chips li {
@@ -224,6 +285,15 @@ section { padding-block: 72px; }
     border-radius: 999px;
     font-weight: 600;
     font-size: .9rem;
+}
+
+.chips.chips-sm li {
+    padding: 4px 11px;
+    font-size: .78rem;
+    font-weight: 600;
+    background: var(--bg);
+    color: var(--muted);
+    border-color: var(--border);
 }
 
 /* Timeline (experiences / formations) */
@@ -243,8 +313,17 @@ section { padding-block: 72px; }
     box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
-.item-title { margin: 0 0 6px; font-size: 1.12rem; }
+.item-title { margin: 0 0 4px; font-size: 1.12rem; }
 .item-body { margin: 0; color: var(--text); }
+
+.meta {
+    margin: 0 0 10px;
+    font-size: .88rem;
+    color: var(--muted);
+}
+.meta strong { color: var(--text); font-weight: 600; }
+
+.project-card .meta { margin: 0; flex: none; }
 
 /* Projects */
 .project-grid {
@@ -263,7 +342,8 @@ section { padding-block: 72px; }
 .project-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
 
 .project-card h4 { margin: 0; font-size: 1.15rem; }
-.project-card p { margin: 0; flex: 1; }
+.project-card p { margin: 0; }
+.project-card p:not(.meta) { flex: 1; }
 
 .empty {
     color: var(--muted);

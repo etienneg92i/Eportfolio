@@ -29,12 +29,18 @@
 
     <header class="hero">
         <div class="wrap">
+            {% if profil.accroche %}
+            <span class="badge">{{ profil.accroche }}</span>
+            {% endif %}
             <h1>{{ profil.nom }}</h1>
             <span class="role">{{ profil.titre }}</span>
             <p class="pitch">{{ profil.presentation }}</p>
             <div class="hero-actions">
                 <a href="#projets" class="btn btn-primary">Voir mes projets</a>
                 <a href="#contact" class="btn btn-light">Me contacter</a>
+                {% if profil.github %}
+                <a href="{{ profil.github }}" class="btn btn-light" target="_blank" rel="noopener">GitHub</a>
+                {% endif %}
             </div>
         </div>
     </header>
@@ -43,13 +49,40 @@
         <section id="apropos" class="alt">
             <div class="wrap">
                 <span class="section-label">À propos</span>
-                <h2 class="section-title">Qui suis-je</h2>
+                <h2 class="section-title">Profil</h2>
                 <p class="section-intro">{{ profil.presentation }}</p>
-                <div class="card">
-                    <p class="item-body">
-                        {{ profil.titre }}. Ce portfolio regroupe mon parcours, mes compétences
-                        et les projets sur lesquels je travaille.
-                    </p>
+
+                <div class="about-grid">
+                    {% if langues %}
+                    <div class="card">
+                        <h3 class="mini-title">Langues</h3>
+                        <ul class="lang-list">
+                            {% for langue in langues %}
+                            <li><span>{{ langue.langue }}</span><span class="muted">{{ langue.niveau }}</span></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    {% if interets %}
+                    <div class="card">
+                        <h3 class="mini-title">Centres d'intérêt</h3>
+                        <ul class="bullet-list">
+                            {% for interet in interets %}
+                            <li>{{ interet }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    <div class="card">
+                        <h3 class="mini-title">Coordonnées</h3>
+                        <ul class="bullet-list">
+                            {% if profil.localisation %}<li>{{ profil.localisation }}</li>{% endif %}
+                            {% if profil.email %}<li><a href="mailto:{{ profil.email }}">{{ profil.email }}</a></li>{% endif %}
+                            {% if profil.telephone %}<li>{{ profil.telephone }}</li>{% endif %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
@@ -58,12 +91,20 @@
             <div class="wrap">
                 <span class="section-label">Savoir-faire</span>
                 <h2 class="section-title">Compétences</h2>
-                <p class="section-intro">Les technologies et outils que j'utilise au quotidien.</p>
-                <ul class="chips">
-                    {% for competence in competences %}
-                    <li>{{ competence }}</li>
+                <p class="section-intro">Les technologies et outils que j'utilise.</p>
+
+                <div class="skills-grid">
+                    {% for groupe in competences %}
+                    <div class="card">
+                        <h3 class="mini-title">{{ groupe.categorie }}</h3>
+                        <ul class="chips">
+                            {% for item in groupe['items'] %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
         </section>
 
@@ -72,10 +113,16 @@
                 <span class="section-label">Parcours</span>
                 <h2 class="section-title">Expériences professionnelles</h2>
                 <p class="section-intro">Mes missions et expériences en entreprise.</p>
+
                 <div class="timeline">
                     {% for experience in experiences %}
                     <article class="card">
                         <h3 class="item-title">{{ experience.titre }}</h3>
+                        <p class="meta">
+                            {% if experience.organisation %}<strong>{{ experience.organisation }}</strong>{% endif %}
+                            {% if experience.lieu %} · {{ experience.lieu }}{% endif %}
+                            {% if experience.periode %} · {{ experience.periode }}{% endif %}
+                        </p>
                         <p class="item-body">{{ experience.description }}</p>
                     </article>
                     {% else %}
@@ -90,10 +137,16 @@
                 <span class="section-label">Études</span>
                 <h2 class="section-title">Formations</h2>
                 <p class="section-intro">Mon cursus et mes diplômes.</p>
+
                 <div class="timeline">
                     {% for formation in formations %}
                     <article class="card">
                         <h3 class="item-title">{{ formation.titre }}</h3>
+                        <p class="meta">
+                            {% if formation.organisation %}<strong>{{ formation.organisation }}</strong>{% endif %}
+                            {% if formation.lieu %} · {{ formation.lieu }}{% endif %}
+                            {% if formation.periode %} · {{ formation.periode }}{% endif %}
+                        </p>
                         <p class="item-body">{{ formation.description }}</p>
                     </article>
                     {% else %}
@@ -106,13 +159,25 @@
         <section id="projets" class="alt">
             <div class="wrap">
                 <span class="section-label">Réalisations</span>
-                <h2 class="section-title">Projets</h2>
+                <h2 class="section-title">Projets d'ingénierie</h2>
                 <p class="section-intro">Une sélection de projets personnels et académiques.</p>
+
                 <div class="project-grid">
                     {% for projet in projets %}
                     <article class="card project-card">
                         <h4>{{ projet.titre }}</h4>
+                        <p class="meta">
+                            {% if projet.organisation %}{{ projet.organisation }}{% endif %}
+                            {% if projet.periode %} · {{ projet.periode }}{% endif %}
+                        </p>
                         <p>{{ projet.description }}</p>
+                        {% if projet.technos %}
+                        <ul class="chips chips-sm">
+                            {% for techno in projet.technos %}
+                            <li>{{ techno }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
                     </article>
                     {% else %}
                     <p class="empty">Aucun projet pour le moment.</p>
@@ -126,10 +191,13 @@
                 <span class="section-label">Contact</span>
                 <h2 class="section-title">Travaillons ensemble</h2>
                 <div class="card contact-card">
-                    <p>Une question, une opportunité ou simplement envie d'échanger&nbsp;? N'hésitez pas à me contacter.</p>
+                    <p>À la recherche d'une alternance en Data / IA. Une opportunité, une question&nbsp;? Écrivez-moi.</p>
                     <div class="contact-actions">
                         {% if profil.email %}
                         <a href="mailto:{{ profil.email }}" class="btn btn-primary">{{ profil.email }}</a>
+                        {% endif %}
+                        {% if profil.telephone %}
+                        <a href="tel:{{ profil.telephone | replace(' ', '') }}" class="btn btn-ghost">{{ profil.telephone }}</a>
                         {% endif %}
                         {% if profil.github %}
                         <a href="{{ profil.github }}" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a>

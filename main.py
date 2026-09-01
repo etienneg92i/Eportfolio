@@ -5,7 +5,15 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from content import competences, experiences, formations, profil, projets
+from content import (
+    competences,
+    experiences,
+    formations,
+    interets,
+    langues,
+    profil,
+    projets,
+)
 
 BASE_DIR = Path(__file__).resolve().parent
 CSS_FILE = BASE_DIR / "static" / "style.css"
@@ -30,6 +38,8 @@ def accueil(request: Request):
         {
             "profil": profil,
             "competences": competences,
+            "langues": langues,
+            "interets": interets,
             "projets": projets,
             "experiences": experiences,
             "formations": formations,
