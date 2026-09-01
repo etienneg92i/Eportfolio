@@ -4,130 +4,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ profil.nom }} - ePortfolio</title>
+    <title>{{ profil.nom }} — {{ profil.titre }}</title>
+    <meta name="description" content="{{ profil.presentation }}">
     <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}?v={{ css_version }}">
 </head>
 
 <body>
-    <div class="container">
-        <header class="hero">
-            <h1>{{ profil.nom }}</h1>
-            <h2>{{ profil.titre }}</h2>
-            <p>{{ profil.presentation }}</p>
-        </header>
-
-        <section class="card">
-            <h3>Mes competences</h3>
-            <ul>
-                {% for competence in competences %}
-                <li>{{ competence }}</li>
-                {% endfor %}
+    <nav class="nav">
+        <div class="wrap nav-inner">
+            <span class="nav-brand">{{ profil.nom }}</span>
+            <ul class="nav-links">
+                <li><a href="#apropos">À propos</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#experiences">Expériences</a></li>
+                <li><a href="#formations">Formations</a></li>
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-        </section>
-
-        {% if is_admin %}
-        <section class="card">
-            <h3>Ajouter un projet</h3>
-            <form method="post" action="/projets" class="project-form">
-                <input type="text" name="titre" placeholder="Titre" required>
-                <textarea name="description" placeholder="Description" required></textarea>
-                <button type="submit">Ajouter</button>
-            </form>
-        </section>
-        {% endif %}
-
-        <section class="card">
-            <h3>Mes projets</h3>
-            {% for projet in projets %}
-            <div class="project">
-                <h4>{{ projet.titre }}</h4>
-                <p>{{ projet.description }}</p>
-                {% if is_admin %}
-                <form method="post" action="/projets/{{ projet.id }}/supprimer">
-                    <button type="submit" class="delete-btn">Supprimer</button>
-                </form>
-                {% endif %}
-            </div>
-            {% else %}
-            <p>Aucun projet pour le moment.</p>
-            {% endfor %}
-        </section>
-
-        {% if is_admin %}
-        <section class="card">
-            <h3>Ajouter une experience professionnelle</h3>
-            <form method="post" action="/experiences" class="project-form">
-                <input type="text" name="titre" placeholder="Titre" required>
-                <textarea name="description" placeholder="Description" required></textarea>
-                <button type="submit">Ajouter</button>
-            </form>
-        </section>
-        {% endif %}
-
-        <section class="card">
-            <h3>Mes experiences professionnelles</h3>
-            {% for experience in experiences %}
-            <div class="project">
-                <h4>{{ experience.titre }}</h4>
-                <p>{{ experience.description }}</p>
-                {% if is_admin %}
-                <form method="post" action="/experiences/{{ experience.id }}/supprimer">
-                    <button type="submit" class="delete-btn">Supprimer</button>
-                </form>
-                {% endif %}
-            </div>
-            {% else %}
-            <p>Aucune experience pour le moment.</p>
-            {% endfor %}
-        </section>
-
-        {% if is_admin %}
-        <section class="card">
-            <h3>Ajouter une formation</h3>
-            <form method="post" action="/formations" class="project-form">
-                <input type="text" name="titre" placeholder="Titre" required>
-                <textarea name="description" placeholder="Description" required></textarea>
-                <button type="submit">Ajouter</button>
-            </form>
-        </section>
-        {% endif %}
-
-        <section class="card">
-            <h3>Mes formations</h3>
-            {% for formation in formations %}
-            <div class="project">
-                <h4>{{ formation.titre }}</h4>
-                <p>{{ formation.description }}</p>
-                {% if is_admin %}
-                <form method="post" action="/formations/{{ formation.id }}/supprimer">
-                    <button type="submit" class="delete-btn">Supprimer</button>
-                </form>
-                {% endif %}
-            </div>
-            {% else %}
-            <p>Aucune formation pour le moment.</p>
-            {% endfor %}
-        </section>
-
-        <section class="card">
-            <h3>Administration</h3>
-            {% if is_admin %}
-            <p>Le contenu peut etre modifie.</p>
-            <form method="post" action="/logout">
-                <button type="submit" class="delete-btn">Se deconnecter</button>
-            </form>
-            {% else %}
-            <p>Se connecter pour modifier les contenus.</p>
-            {% if auth_error %}
-            <p>Mot de passe incorrect.</p>
+            {% if profil.email %}
+            <a href="mailto:{{ profil.email }}" class="btn btn-ghost btn-sm">Contact</a>
             {% endif %}
-            <form method="post" action="/login" class="project-form">
-                <input type="password" name="password" placeholder="Mot de passe admin" required>
-                <button type="submit">Se connecter</button>
-            </form>
-            {% endif %}
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="wrap">
+            <h1>{{ profil.nom }}</h1>
+            <span class="role">{{ profil.titre }}</span>
+            <p class="pitch">{{ profil.presentation }}</p>
+            <div class="hero-actions">
+                <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+                <a href="#contact" class="btn btn-light">Me contacter</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="apropos" class="alt">
+            <div class="wrap">
+                <span class="section-label">À propos</span>
+                <h2 class="section-title">Qui suis-je</h2>
+                <p class="section-intro">{{ profil.presentation }}</p>
+                <div class="card">
+                    <p class="item-body">
+                        {{ profil.titre }}. Ce portfolio regroupe mon parcours, mes compétences
+                        et les projets sur lesquels je travaille.
+                    </p>
+                </div>
+            </div>
         </section>
-    </div>
+
+        <section id="competences">
+            <div class="wrap">
+                <span class="section-label">Savoir-faire</span>
+                <h2 class="section-title">Compétences</h2>
+                <p class="section-intro">Les technologies et outils que j'utilise au quotidien.</p>
+                <ul class="chips">
+                    {% for competence in competences %}
+                    <li>{{ competence }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+        <section id="experiences" class="alt">
+            <div class="wrap">
+                <span class="section-label">Parcours</span>
+                <h2 class="section-title">Expériences professionnelles</h2>
+                <p class="section-intro">Mes missions et expériences en entreprise.</p>
+                <div class="timeline">
+                    {% for experience in experiences %}
+                    <article class="card">
+                        <h3 class="item-title">{{ experience.titre }}</h3>
+                        <p class="item-body">{{ experience.description }}</p>
+                    </article>
+                    {% else %}
+                    <p class="empty">Aucune expérience pour le moment.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section id="formations">
+            <div class="wrap">
+                <span class="section-label">Études</span>
+                <h2 class="section-title">Formations</h2>
+                <p class="section-intro">Mon cursus et mes diplômes.</p>
+                <div class="timeline">
+                    {% for formation in formations %}
+                    <article class="card">
+                        <h3 class="item-title">{{ formation.titre }}</h3>
+                        <p class="item-body">{{ formation.description }}</p>
+                    </article>
+                    {% else %}
+                    <p class="empty">Aucune formation pour le moment.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section id="projets" class="alt">
+            <div class="wrap">
+                <span class="section-label">Réalisations</span>
+                <h2 class="section-title">Projets</h2>
+                <p class="section-intro">Une sélection de projets personnels et académiques.</p>
+                <div class="project-grid">
+                    {% for projet in projets %}
+                    <article class="card project-card">
+                        <h4>{{ projet.titre }}</h4>
+                        <p>{{ projet.description }}</p>
+                    </article>
+                    {% else %}
+                    <p class="empty">Aucun projet pour le moment.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="wrap">
+                <span class="section-label">Contact</span>
+                <h2 class="section-title">Travaillons ensemble</h2>
+                <div class="card contact-card">
+                    <p>Une question, une opportunité ou simplement envie d'échanger&nbsp;? N'hésitez pas à me contacter.</p>
+                    <div class="contact-actions">
+                        {% if profil.email %}
+                        <a href="mailto:{{ profil.email }}" class="btn btn-primary">{{ profil.email }}</a>
+                        {% endif %}
+                        {% if profil.github %}
+                        <a href="{{ profil.github }}" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a>
+                        {% endif %}
+                        {% if profil.linkedin %}
+                        <a href="{{ profil.linkedin }}" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="wrap">
+            <p>&copy; {{ profil.nom }}
+                {% if profil.github %} · <a href="{{ profil.github }}" target="_blank" rel="noopener">GitHub</a>{% endif %}
+                {% if profil.linkedin %} · <a href="{{ profil.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>{% endif %}
+            </p>
+        </div>
+    </footer>
 </body>
 
 </html>
