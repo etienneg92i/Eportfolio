@@ -167,7 +167,8 @@
                     <article class="card project-card">
                         <h4>{{ projet.titre }}</h4>
                         <p class="meta">
-                            {% if projet.organisation %}{{ projet.organisation }}{% endif %}
+                            {% if projet.cadre %}{{ projet.cadre }}{% endif %}
+                            {% if projet.organisation %} · {{ projet.organisation }}{% endif %}
                             {% if projet.periode %} · {{ projet.periode }}{% endif %}
                         </p>
                         <p>{{ projet.description }}</p>

@@ -66,7 +66,8 @@ interets = [
 projets = [
     {
         "titre": "RenovTaCana — outil d'aide à la décision",
-        "organisation": "Projet industriel en équipe · Eau d'Azur",
+        "cadre": "Projet industriel en équipe",
+        "organisation": "Eau d'Azur",
         "periode": "2026 · 7 semaines",
         "description": (
             "Outil d'aide à la décision pour automatiser la planification du "
@@ -77,7 +78,8 @@ projets = [
     },
     {
         "titre": "Borne d'arcade",
-        "organisation": "Projet en équipe",
+        "cadre": "Projet en équipe",
+        "organisation": "",
         "periode": "2025 · 4 semaines",
         "description": (
             "Conception et construction d'une borne d'arcade fonctionnelle : "
