@@ -7,7 +7,7 @@ mettre a jour le contenu. Aucune base de donnees, aucun mode admin.
 profil = {
     "nom": "Etienne Girard",
     "titre": "Étudiant ingénieur — Majeure Data & IA",
-    "accroche": "Alternant Data · service Finance chez Décathlon",
+    "accroche": "Alternant Data Finance chez Décathlon — en poste depuis 2026",
     "presentation": (
         "Étudiant ingénieur à l'EPF, spécialisé en Data et Intelligence "
         "Artificielle, actuellement en alternance dans le service Finance de "
@@ -61,6 +61,7 @@ langues = [
 interets = [
     "Football & tennis",
     "Voyages : Japon, États-Unis, Brésil, Tanzanie, Angleterre, Argentine, Canada",
+    "Ouvert au réseau",
 ]
 
 projets = [
