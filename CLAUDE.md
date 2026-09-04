@@ -19,6 +19,11 @@ Pas de base de données, pas d'authentification.
 Après un changement de `content.py` ou `templates/index.html`, suivre le skill
 `verify-page-render` avant de commiter. Il se déclenche seul via sa description.
 
+Garde-fou : un `git commit` est **bloqué** si `content.py` n'importe pas ou si
+`index.html` ne rend pas (`.claude/hooks/block-broken-commit.py`, côté agent).
+Même contrôle côté git : `git config core.hooksPath .githooks` (une fois par
+clone) active `.githooks/pre-commit`.
+
 ### Issue tracker
 
 Issues and specs live in GitHub Issues for `etienneg92i/Projet-eportfolio`, via the `gh` CLI. See `docs/agents/issue-tracker.md`.

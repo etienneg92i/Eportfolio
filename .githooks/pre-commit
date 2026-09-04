@@ -1,0 +1,19 @@
+#!/bin/sh
+# Enforcement (Lab 2) — refuse un commit quand le site portfolio est cassé.
+# Même contrôle que le hook PreToolUse .claude/hooks/block-broken-commit.py,
+# mais côté git : il couvre aussi les commits qui ne passent pas par l'agent.
+#
+# À activer une fois par clone :
+#     git config core.hooksPath .githooks
+
+set -e
+
+python -c "import content" || {
+  echo "pre-commit BLOQUÉ : content.py n'importe pas." >&2
+  exit 1
+}
+
+python .claude/skills/verify-page-render/scripts/render.py || {
+  echo "pre-commit BLOQUÉ : le rendu de index.html échoue (voir ci-dessus)." >&2
+  exit 1
+}
