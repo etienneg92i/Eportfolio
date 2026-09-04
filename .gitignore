@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
 portfolio.db
+cv_preview_test.pdf
 .venv/
 venv/
 .env
