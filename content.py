@@ -28,7 +28,6 @@ faits = [
     {"libelle": "Poste", "valeur": "Data Scientist en alternance"},
     {"libelle": "Entreprise", "valeur": "Décathlon — Finance Data"},
     {"libelle": "École", "valeur": "EPF, Majeure Data & IA"},
-    {"libelle": "International", "valeur": "Semestre à Buenos Aires"},
     {"libelle": "Base", "valeur": "Paris, France"},
 ]
 
