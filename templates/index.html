@@ -23,8 +23,8 @@
             <nav class="site-nav">
                 <a class="site-nav__tab" href="#accueil" data-view="accueil" aria-current="page">Accueil</a>
                 <a class="site-nav__tab" href="#apropos" data-view="apropos">À propos</a>
-                <a class="site-nav__tab" href="#projets" data-view="projets">Projets</a>
-                <a class="site-nav__tab" href="#parcours" data-view="parcours">Parcours</a>
+                <a class="site-nav__tab" href="#parcours" data-view="parcours">Formation &amp; projets</a>
+                <a class="site-nav__tab" href="#experience" data-view="experience">Expérience</a>
                 <a class="site-nav__tab" href="#contact" data-view="contact">Contact</a>
             </nav>
         </div>
@@ -42,7 +42,7 @@
                             <h1 class="hero__title">Étudiant<br>ingénieur<br><span class="accent">Data &amp; IA</span></h1>
                             <p class="hero__pitch">{{ hero_pitch }}</p>
                             <div class="hero__actions">
-                                <a href="#projets" data-view="projets" class="btn btn-primary">Voir les projets</a>
+                                <a href="#parcours" data-view="parcours" class="btn btn-primary">Voir les projets</a>
                                 <a href="#contact" data-view="contact" class="btn btn-secondary">Me contacter</a>
                             </div>
                         </div>
@@ -147,13 +147,32 @@
             </div>
         </section>
 
-        <!-- ══ Projets ══════════════════════════════════════════════════════ -->
-        <section class="view" id="projets" data-view="projets">
+        <!-- ══ Formation & projets ═════════════════════════════════════════ -->
+        <section class="view" id="parcours" data-view="parcours">
             <div class="container container--view">
-                <span class="view__eyebrow">Réalisations</span>
-                <h1 class="view__title">Projets d'ingénierie</h1>
-                <p class="view__subtitle">Une sélection de projets d'équipe, académiques et industriels.</p>
+                <span class="view__eyebrow">Parcours</span>
+                <h1 class="view__title">Formation<br>&amp; projets</h1>
 
+                <h2 class="eyebrow">Formations</h2>
+                <div class="entries entries--gap">
+                    {% for formation in formations %}
+                    <article class="entry">
+                        <div>
+                            <p class="entry__period">{{ formation.periode }}</p>
+                            {% if formation.organisation %}<p class="entry__org">{{ formation.organisation }}</p>{% endif %}
+                            {% if formation.lieu %}<p class="entry__place">{{ formation.lieu }}</p>{% endif %}
+                        </div>
+                        <div>
+                            <h3 class="entry__role">{{ formation.titre }}</h3>
+                            <p class="entry__desc">{{ formation.description }}</p>
+                        </div>
+                    </article>
+                    {% else %}
+                    <p>Aucune formation pour le moment.</p>
+                    {% endfor %}
+                </div>
+
+                <h2 class="eyebrow">Projets</h2>
                 <div class="projects">
                     {% for projet in projets %}
                     {% set meta = [projet.cadre, projet.organisation, projet.periode] | select | list %}
@@ -180,14 +199,13 @@
             </div>
         </section>
 
-        <!-- ══ Parcours ═════════════════════════════════════════════════════ -->
-        <section class="view" id="parcours" data-view="parcours">
+        <!-- ══ Expérience ═══════════════════════════════════════════════════ -->
+        <section class="view" id="experience" data-view="experience">
             <div class="container container--view">
                 <span class="view__eyebrow">Parcours</span>
-                <h1 class="view__title">Expériences<br>&amp; formations</h1>
+                <h1 class="view__title">Expérience</h1>
 
-                <h2 class="eyebrow">Expériences</h2>
-                <div class="entries entries--exp">
+                <div class="entries">
                     {% for experience in experiences %}
                     <article class="entry">
                         <div>
@@ -202,25 +220,6 @@
                     </article>
                     {% else %}
                     <p>Aucune expérience pour le moment.</p>
-                    {% endfor %}
-                </div>
-
-                <h2 class="eyebrow">Formations</h2>
-                <div class="entries">
-                    {% for formation in formations %}
-                    <article class="entry">
-                        <div>
-                            <p class="entry__period">{{ formation.periode }}</p>
-                            {% if formation.organisation %}<p class="entry__org">{{ formation.organisation }}</p>{% endif %}
-                            {% if formation.lieu %}<p class="entry__place">{{ formation.lieu }}</p>{% endif %}
-                        </div>
-                        <div>
-                            <h3 class="entry__role">{{ formation.titre }}</h3>
-                            <p class="entry__desc">{{ formation.description }}</p>
-                        </div>
-                    </article>
-                    {% else %}
-                    <p>Aucune formation pour le moment.</p>
                     {% endfor %}
                 </div>
             </div>
@@ -276,7 +275,7 @@
 
     <script>
         (function () {
-            var VIEWS = ['accueil', 'apropos', 'projets', 'parcours', 'contact'];
+            var VIEWS = ['accueil', 'apropos', 'parcours', 'experience', 'contact'];
             var body = document.body;
             var tabs = document.querySelectorAll('a[data-view]');
             var sections = document.querySelectorAll('.view');

@@ -13,7 +13,8 @@ procédure et un script qui rend `templates/index.html` sans FastAPI.
 
 1. **Lister les vues touchées** par le diff. Les cinq vues de `index.html`
    (attribut `data-view` / `id`) : `accueil` (hero + bande d'infos + compétences),
-   `apropos`, `projets`, `parcours` (expériences + formations), `contact`.
+   `apropos`, `parcours` (formations + projets), `experience` (expériences),
+   `contact`.
 
 2. **Rendre la page.**
    - Si `conda activate data_manipulation` fonctionne :

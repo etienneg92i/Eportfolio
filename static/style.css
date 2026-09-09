@@ -228,9 +228,9 @@ body.has-js .view.is-active { display: block; }
   text-transform: uppercase;
   margin: 0 0 40px;
 }
-[data-view="projets"]  .view__title { margin-bottom: 12px; }
-[data-view="parcours"] .view__title { margin-bottom: 48px; }
-[data-view="contact"]  .view__title { margin-bottom: 32px; }
+[data-view="parcours"]   .view__title { margin-bottom: 12px; }
+[data-view="experience"] .view__title { margin-bottom: 48px; }
+[data-view="contact"]    .view__title { margin-bottom: 32px; }
 
 .view__subtitle {
   margin: 0 0 48px;
@@ -478,7 +478,7 @@ a.contact-list__value { word-break: break-all; }
 
 /* ══ Parcours ═══════════════════════════════════════════════════════════════ */
 .entries { display: grid; gap: 0; }
-.entries--exp { margin-bottom: 64px; }
+.entries--gap { margin-bottom: 64px; }
 .entry {
   border-top: 2px solid var(--color-text);
   padding: 24px 0;

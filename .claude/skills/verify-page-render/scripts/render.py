@@ -62,7 +62,7 @@ for bad in ("Undefined", "<strong></strong>", "<strong> </strong>"):
         problems.append(f"présence de {bad!r}")
 
 # Les cinq vues doivent être rendues.
-for view in ("accueil", "apropos", "projets", "parcours", "contact"):
+for view in ("accueil", "apropos", "parcours", "experience", "contact"):
     if f'data-view="{view}"' not in html:
         problems.append(f"vue absente : data-view=\"{view}\"")
 
@@ -75,10 +75,11 @@ for m in re.finditer(r'<p class="project__meta">(.*?)</p>', html, re.S):
         problems.append(f"séparateur ' · ' orphelin : {seg!r}")
 
 # Nombre de cartes rendues == nombre d'entrées dans content.py.
-projets_html = between('id="projets"', 'id="parcours"')
-parcours_html = between('id="parcours"', 'id="contact"')
-exp_html = parcours_html.split(">Formations<")[0]
-form_html = parcours_html.split(">Formations<")[1] if ">Formations<" in parcours_html else ""
+# Vue "parcours" : Formations puis Projets. Vue "experience" : Expériences.
+parcours_html = between('id="parcours"', 'id="experience"')
+exp_html = between('id="experience"', 'id="contact"')
+form_html = parcours_html.split(">Projets<")[0]
+projets_html = parcours_html.split(">Projets<")[1] if ">Projets<" in parcours_html else ""
 
 card_counts = {
     "projets": (len(content.projets), projets_html.count('<article class="project">')),
