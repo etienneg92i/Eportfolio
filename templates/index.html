@@ -10,216 +10,310 @@
 </head>
 
 <body>
-    <nav class="nav">
-        <div class="wrap nav-inner">
-            <span class="nav-brand">{{ profil.nom }}</span>
-            <ul class="nav-links">
-                <li><a href="#apropos">À propos</a></li>
-                <li><a href="#competences">Compétences</a></li>
-                <li><a href="#experiences">Expériences</a></li>
-                <li><a href="#formations">Formations</a></li>
-                <li><a href="#projets">Projets</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            {% if profil.email %}
-            <a href="mailto:{{ profil.email }}" class="btn btn-ghost btn-sm">Contact</a>
-            {% endif %}
-        </div>
-    </nav>
+    {# Deux premières phrases de la présentation, pour l'accroche du hero. #}
+    {% set _phrases = profil.presentation.split('. ') %}
+    {% set hero_pitch = (_phrases[:2] | join('. ')) ~ ('.' if _phrases | length > 2 else '') %}
 
-    <header class="hero">
-        <div class="wrap">
-            {% if profil.accroche %}
-            <span class="badge">{{ profil.accroche }}</span>
-            {% endif %}
-            <h1>{{ profil.nom }}</h1>
-            <span class="role">{{ profil.titre }}</span>
-            <p class="pitch">{{ profil.presentation }}</p>
-            <div class="hero-actions">
-                <a href="#projets" class="btn btn-primary">Voir mes projets</a>
-                <a href="#contact" class="btn btn-light">Me contacter</a>
-                {% if profil.github %}
-                <a href="{{ profil.github }}" class="btn btn-light" target="_blank" rel="noopener">GitHub</a>
-                {% endif %}
+    <header class="site-header">
+        <div class="site-header__inner">
+            <div class="brand">
+                <span class="brand__name">{{ profil.nom }}</span>
+                <span class="brand__role">Data &amp; IA</span>
             </div>
+            <nav class="site-nav">
+                <a class="site-nav__tab" href="#accueil" data-view="accueil" aria-current="page">Accueil</a>
+                <a class="site-nav__tab" href="#apropos" data-view="apropos">À propos</a>
+                <a class="site-nav__tab" href="#projets" data-view="projets">Projets</a>
+                <a class="site-nav__tab" href="#parcours" data-view="parcours">Parcours</a>
+                <a class="site-nav__tab" href="#contact" data-view="contact">Contact</a>
+            </nav>
         </div>
     </header>
 
     <main>
-        <section id="apropos" class="alt">
-            <div class="wrap">
-                <span class="section-label">À propos</span>
-                <h2 class="section-title">Profil</h2>
-                <p class="section-intro">{{ profil.presentation }}</p>
+        <!-- ══ Accueil ══════════════════════════════════════════════════════ -->
+        <section class="view is-active" id="accueil" data-view="accueil">
+            <div class="hero">
+                <div class="container">
+                    <div class="hero__grid">
+                        <div class="hero__text">
+                            <span class="hero__kicker">Portfolio 2026</span>
+                            {# Traitement typographique du titre, cf. design handoff. #}
+                            <h1 class="hero__title">Étudiant<br>ingénieur<br><span class="accent">Data &amp; IA</span></h1>
+                            <p class="hero__pitch">{{ hero_pitch }}</p>
+                            <div class="hero__actions">
+                                <a href="#projets" data-view="projets" class="btn btn-primary">Voir les projets</a>
+                                <a href="#contact" data-view="contact" class="btn btn-secondary">Me contacter</a>
+                            </div>
+                        </div>
+                        <div class="hero__media">
+                            <div class="hero__portrait">
+                                <img src="{{ url_for('static', path='portrait.jpg') }}" alt="{{ profil.nom }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                <div class="about-grid">
-                    {% if langues %}
-                    <div class="card">
-                        <h3 class="mini-title">Langues</h3>
+            <div class="facts">
+                <div class="container">
+                    <div class="facts__grid">
+                        {% for fait in faits %}
+                        <div class="fact">
+                            <span class="fact__label">{{ fait.libelle }}</span>
+                            <span class="fact__value">{{ fait.valeur }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills">
+                <div class="container container--pad">
+                    <h2 class="eyebrow">Compétences</h2>
+                    <div class="skills__grid">
+                        {% for groupe in competences %}
+                        <div class="skill-group">
+                            <h3 class="skill-group__name">{{ groupe.categorie }}</h3>
+                            <ul class="dash-list">
+                                {% for item in groupe['items'] %}
+                                <li>{{ item }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ À propos ═════════════════════════════════════════════════════ -->
+        <section class="view" id="apropos" data-view="apropos">
+            <div class="container container--view">
+                <span class="view__eyebrow">À propos</span>
+                <h1 class="view__title">Profil</h1>
+                <p class="about__lead">{{ profil.presentation }}</p>
+
+                <div class="about__grid">
+                    <div class="about__col">
+                        <h2 class="eyebrow">Langues</h2>
                         <ul class="lang-list">
                             {% for langue in langues %}
-                            <li><span>{{ langue.langue }}</span><span class="muted">{{ langue.niveau }}</span></li>
+                            <li>
+                                <span class="lang-list__name">{{ langue.langue }}</span>
+                                <span class="lang-list__level">{{ langue.niveau }}</span>
+                            </li>
                             {% endfor %}
                         </ul>
                     </div>
-                    {% endif %}
-
-                    {% if interets %}
-                    <div class="card">
-                        <h3 class="mini-title">Centres d'intérêt</h3>
-                        <ul class="bullet-list">
+                    <div class="about__col about__col--interets">
+                        <h2 class="eyebrow">Centres d'intérêt</h2>
+                        <ul class="dash-list">
                             {% for interet in interets %}
                             <li>{{ interet }}</li>
                             {% endfor %}
                         </ul>
                     </div>
-                    {% endif %}
-
-                    <div class="card">
-                        <h3 class="mini-title">Coordonnées</h3>
-                        <ul class="bullet-list">
-                            {% if profil.localisation %}<li>{{ profil.localisation }}</li>{% endif %}
-                            {% if profil.email %}<li><a href="mailto:{{ profil.email }}">{{ profil.email }}</a></li>{% endif %}
-                            {% if profil.telephone %}<li>{{ profil.telephone }}</li>{% endif %}
+                    <div class="about__col">
+                        <h2 class="eyebrow">Coordonnées</h2>
+                        <ul class="contact-list">
+                            {% if profil.localisation %}
+                            <li>
+                                <span class="contact-list__label">Localisation</span>
+                                <span class="contact-list__value">{{ profil.localisation }}</span>
+                            </li>
+                            {% endif %}
+                            {% if profil.email %}
+                            <li>
+                                <span class="contact-list__label">E-mail</span>
+                                <a class="contact-list__value" href="mailto:{{ profil.email }}">{{ profil.email }}</a>
+                            </li>
+                            {% endif %}
+                            {% if profil.github %}
+                            <li>
+                                <span class="contact-list__label">GitHub</span>
+                                <a class="contact-list__value" href="{{ profil.github }}" target="_blank" rel="noopener">{{ profil.github | replace('https://', '') }}</a>
+                            </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="competences">
-            <div class="wrap">
-                <span class="section-label">Savoir-faire</span>
-                <h2 class="section-title">Compétences</h2>
-                <p class="section-intro">Les technologies et outils que j'utilise.</p>
+        <!-- ══ Projets ══════════════════════════════════════════════════════ -->
+        <section class="view" id="projets" data-view="projets">
+            <div class="container container--view">
+                <span class="view__eyebrow">Réalisations</span>
+                <h1 class="view__title">Projets d'ingénierie</h1>
+                <p class="view__subtitle">Une sélection de projets d'équipe, académiques et industriels.</p>
 
-                <div class="skills-grid">
-                    {% for groupe in competences %}
-                    <div class="card">
-                        <h3 class="mini-title">{{ groupe.categorie }}</h3>
-                        <ul class="chips">
-                            {% for item in groupe['items'] %}
-                            <li>{{ item }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
-
-        <section id="experiences" class="alt">
-            <div class="wrap">
-                <span class="section-label">Parcours</span>
-                <h2 class="section-title">Expériences</h2>
-                <p class="section-intro">Alternance, jobs, stages et missions.</p>
-
-                <div class="timeline">
-                    {% for experience in experiences %}
-                    <article class="card">
-                        <h3 class="item-title">{{ experience.titre }}</h3>
-                        <p class="meta">
-                            {% if experience.organisation %}<strong>{{ experience.organisation }}</strong>{% endif %}
-                            {% if experience.lieu %} · {{ experience.lieu }}{% endif %}
-                            {% if experience.periode %} · {{ experience.periode }}{% endif %}
-                        </p>
-                        <p class="item-body">{{ experience.description }}</p>
-                    </article>
-                    {% else %}
-                    <p class="empty">Aucune expérience pour le moment.</p>
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
-
-        <section id="formations">
-            <div class="wrap">
-                <span class="section-label">Études</span>
-                <h2 class="section-title">Formations</h2>
-                <p class="section-intro">Mon cursus et mes diplômes.</p>
-
-                <div class="timeline">
-                    {% for formation in formations %}
-                    <article class="card">
-                        <h3 class="item-title">{{ formation.titre }}</h3>
-                        <p class="meta">
-                            {% if formation.organisation %}<strong>{{ formation.organisation }}</strong>{% endif %}
-                            {% if formation.lieu %} · {{ formation.lieu }}{% endif %}
-                            {% if formation.periode %} · {{ formation.periode }}{% endif %}
-                        </p>
-                        <p class="item-body">{{ formation.description }}</p>
-                    </article>
-                    {% else %}
-                    <p class="empty">Aucune formation pour le moment.</p>
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
-
-        <section id="projets" class="alt">
-            <div class="wrap">
-                <span class="section-label">Réalisations</span>
-                <h2 class="section-title">Projets d'ingénierie</h2>
-                <p class="section-intro">Une sélection de projets d'équipe, académiques et industriels.</p>
-
-                <div class="project-grid">
+                <div class="projects">
                     {% for projet in projets %}
-                    <article class="card project-card">
-                        <h4>{{ projet.titre }}</h4>
-                        <p class="meta">
-                            {% if projet.cadre %}{{ projet.cadre }}{% endif %}
-                            {% if projet.organisation %} · {{ projet.organisation }}{% endif %}
-                            {% if projet.periode %} · {{ projet.periode }}{% endif %}
-                        </p>
-                        <p>{{ projet.description }}</p>
-                        {% if projet.technos %}
-                        <ul class="chips chips-sm">
-                            {% for techno in projet.technos %}
-                            <li>{{ techno }}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
+                    {% set meta = [projet.cadre, projet.organisation, projet.periode] | select | list %}
+                    <article class="project">
+                        <div>
+                            <h2 class="project__name">{{ projet.titre }}</h2>
+                            {% if meta %}<p class="project__meta">{{ meta | join(' · ') }}</p>{% endif %}
+                        </div>
+                        <div>
+                            <p class="project__desc">{{ projet.description }}</p>
+                            {% if projet.technos %}
+                            <ul class="project__tags">
+                                {% for techno in projet.technos %}
+                                <li class="tag tag-outline">{{ techno }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
                     </article>
                     {% else %}
-                    <p class="empty">Aucun projet pour le moment.</p>
+                    <p>Aucun projet pour le moment.</p>
                     {% endfor %}
                 </div>
             </div>
         </section>
 
-        <section id="contact">
-            <div class="wrap">
-                <span class="section-label">Contact</span>
-                <h2 class="section-title">Travaillons ensemble</h2>
-                <div class="card contact-card">
-                    <p>En alternance Data au sein du service Finance de Décathlon. Ouvert aux échanges pour la suite&nbsp;? Écrivez-moi.</p>
-                    <div class="contact-actions">
-                        {% if profil.email %}
-                        <a href="mailto:{{ profil.email }}" class="btn btn-primary">{{ profil.email }}</a>
-                        {% endif %}
-                        {% if profil.telephone %}
-                        <a href="tel:{{ profil.telephone | replace(' ', '') }}" class="btn btn-ghost">{{ profil.telephone }}</a>
-                        {% endif %}
-                        {% if profil.github %}
-                        <a href="{{ profil.github }}" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a>
-                        {% endif %}
-                        {% if profil.linkedin %}
-                        <a href="{{ profil.linkedin }}" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
-                        {% endif %}
+        <!-- ══ Parcours ═════════════════════════════════════════════════════ -->
+        <section class="view" id="parcours" data-view="parcours">
+            <div class="container container--view">
+                <span class="view__eyebrow">Parcours</span>
+                <h1 class="view__title">Expériences<br>&amp; formations</h1>
+
+                <h2 class="eyebrow">Expériences</h2>
+                <div class="entries entries--exp">
+                    {% for experience in experiences %}
+                    <article class="entry">
+                        <div>
+                            <p class="entry__period">{{ experience.periode }}</p>
+                            {% if experience.organisation %}<p class="entry__org">{{ experience.organisation }}</p>{% endif %}
+                            {% if experience.lieu %}<p class="entry__place">{{ experience.lieu }}</p>{% endif %}
+                        </div>
+                        <div>
+                            <h3 class="entry__role">{{ experience.titre }}</h3>
+                            <p class="entry__desc">{{ experience.description }}</p>
+                        </div>
+                    </article>
+                    {% else %}
+                    <p>Aucune expérience pour le moment.</p>
+                    {% endfor %}
+                </div>
+
+                <h2 class="eyebrow">Formations</h2>
+                <div class="entries">
+                    {% for formation in formations %}
+                    <article class="entry">
+                        <div>
+                            <p class="entry__period">{{ formation.periode }}</p>
+                            {% if formation.organisation %}<p class="entry__org">{{ formation.organisation }}</p>{% endif %}
+                            {% if formation.lieu %}<p class="entry__place">{{ formation.lieu }}</p>{% endif %}
+                        </div>
+                        <div>
+                            <h3 class="entry__role">{{ formation.titre }}</h3>
+                            <p class="entry__desc">{{ formation.description }}</p>
+                        </div>
+                    </article>
+                    {% else %}
+                    <p>Aucune formation pour le moment.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ Contact ══════════════════════════════════════════════════════ -->
+        <section class="view" id="contact" data-view="contact">
+            <div class="container container--contact">
+                <span class="view__eyebrow">Contact</span>
+                <h1 class="view__title">Travaillons<br>ensemble</h1>
+                <p class="contact__lead">En alternance Data au sein du service Finance de Décathlon. Ouvert aux échanges pour la suite&nbsp;? Écrivez-moi.</p>
+
+                <div class="contact-band">
+                    {% if profil.email %}
+                    <div class="contact-band__cell">
+                        <p class="contact-band__label">E-mail</p>
+                        <a class="contact-band__value" href="mailto:{{ profil.email }}">{{ profil.email }}</a>
                     </div>
+                    {% endif %}
+                    {% if profil.github %}
+                    <div class="contact-band__cell">
+                        <p class="contact-band__label">GitHub</p>
+                        <a class="contact-band__value" href="{{ profil.github }}" target="_blank" rel="noopener">{{ profil.github | replace('https://', '') }}</a>
+                    </div>
+                    {% endif %}
+                    {% if profil.localisation %}
+                    <div class="contact-band__cell">
+                        <p class="contact-band__label">Localisation</p>
+                        <p class="contact-band__value">{{ profil.localisation }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="poster">
+                <div class="poster__inner">
+                    <p>Ouvert au réseau et aux nouvelles missions.</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="wrap">
-            <p>&copy; {{ profil.nom }}
-                {% if profil.github %} · <a href="{{ profil.github }}" target="_blank" rel="noopener">GitHub</a>{% endif %}
-                {% if profil.linkedin %} · <a href="{{ profil.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>{% endif %}
-            </p>
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <span>&copy; 2026 {{ profil.nom }}</span>
+            <span class="site-footer__links">
+                {% if profil.email %}<a href="mailto:{{ profil.email }}">E-mail</a>{% endif %}
+                {% if profil.github %}<a href="{{ profil.github }}" target="_blank" rel="noopener">GitHub</a>{% endif %}
+            </span>
         </div>
     </footer>
+
+    <script>
+        (function () {
+            var VIEWS = ['accueil', 'apropos', 'projets', 'parcours', 'contact'];
+            var body = document.body;
+            var tabs = document.querySelectorAll('[data-view]');
+            var sections = document.querySelectorAll('.view');
+            body.classList.add('has-js');
+
+            function show(view) {
+                if (VIEWS.indexOf(view) === -1) view = 'accueil';
+                sections.forEach(function (s) {
+                    s.classList.toggle('is-active', s.dataset.view === view);
+                });
+                document.querySelectorAll('.site-nav__tab').forEach(function (t) {
+                    if (t.dataset.view === view) t.setAttribute('aria-current', 'page');
+                    else t.removeAttribute('aria-current');
+                });
+            }
+
+            function currentView() {
+                return (location.hash || '').replace(/^#/, '');
+            }
+
+            tabs.forEach(function (t) {
+                t.addEventListener('click', function (e) {
+                    var view = t.dataset.view;
+                    if (VIEWS.indexOf(view) === -1) return;
+                    e.preventDefault();
+                    if (('#' + view) !== location.hash) {
+                        history.pushState(null, '', '#' + view);
+                    }
+                    show(view);
+                    window.scrollTo(0, 0);
+                });
+            });
+
+            window.addEventListener('popstate', function () {
+                show(currentView());
+                window.scrollTo(0, 0);
+            });
+            window.addEventListener('hashchange', function () {
+                show(currentView());
+            });
+
+            show(currentView());
+        })();
+    </script>
 </body>
 
 </html>

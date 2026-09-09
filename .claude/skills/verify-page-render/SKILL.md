@@ -11,8 +11,9 @@ procédure et un script qui rend `templates/index.html` sans FastAPI.
 
 ## Procédure
 
-1. **Lister les sections touchées** par le diff. Les sections de `index.html` :
-   `apropos`, `competences`, `experiences`, `formations`, `projets`, `contact`.
+1. **Lister les vues touchées** par le diff. Les cinq vues de `index.html`
+   (attribut `data-view` / `id`) : `accueil` (hero + bande d'infos + compétences),
+   `apropos`, `projets`, `parcours` (expériences + formations), `contact`.
 
 2. **Rendre la page.**
    - Si `conda activate data_manipulation` fonctionne :
@@ -32,16 +33,19 @@ Le travail est vérifié quand, pour **chaque section touchée par le diff** :
 
 - [ ] Le texte que tu as modifié apparaît **au mot près** dans le HTML rendu.
 - [ ] Aucune trace de gabarit : pas de `{{`, `}}`, ni `Undefined` dans la sortie.
-- [ ] Aucun `<strong></strong>` vide ni `<p class="meta">` vide.
-- [ ] Aucun séparateur ` · ` orphelin (en début/fin de ligne meta, ou `· ·`).
+- [ ] Aucun `<strong></strong>` vide ni `<p class="project__meta">` vide.
+- [ ] Aucun séparateur ` · ` orphelin dans la méta projet (début/fin, ou `· ·`).
 - [ ] Le nombre de cartes rendues = le nombre d'entrées dans la liste de
       `content.py` (`projets`, `experiences`, `formations`).
+- [ ] La bascule de vue fonctionne : ouvrir `_render.html` ne montre qu'une vue
+      à la fois une fois le JS chargé, et les cinq `data-view` sont présents.
 - [ ] Si tu as ajouté ou retiré un champ **optionnel** d'un dict (un champ que
       d'autres entrées laissent vide, ex. `organisation`, `lieu`, `linkedin`),
       tu as aussi vérifié le rendu d'une entrée où ce champ est vide.
 
-`scripts/render.py` vérifie automatiquement les points 2 à 5 et sort en erreur
-s'ils échouent. Les points 1 et 6 sont à ta charge, à l'œil.
+`scripts/render.py` vérifie automatiquement les points 2 à 5 (délimiteurs Jinja,
+méta orpheline, nombre de cartes, présence des cinq `data-view`) et sort en
+erreur s'ils échouent. Les points 1, 6 et 7 sont à ta charge, à l'œil.
 
 ## Ne concerne pas
 

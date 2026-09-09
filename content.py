@@ -22,6 +22,14 @@ profil = {
     "linkedin": "",
 }
 
+faits = [
+    {"libelle": "Poste", "valeur": "Alternant Data — Finance"},
+    {"libelle": "Entreprise", "valeur": "Décathlon"},
+    {"libelle": "École", "valeur": "EPF — Majeure Data & IA"},
+    {"libelle": "Base", "valeur": "Paris, France"},
+    {"libelle": "Langues", "valeur": "FR · EN B2 · ES B2"},
+]
+
 competences = [
     {
         "categorie": "Programmation & Data",

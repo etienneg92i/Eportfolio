@@ -23,6 +23,7 @@ env.globals["url_for"] = lambda *a, **k: "#"
 
 ctx = dict(
     profil=content.profil,
+    faits=content.faits,
     competences=content.competences,
     langues=content.langues,
     interets=content.interets,
@@ -43,10 +44,13 @@ out.write_text(html, encoding="utf-8")
 print(f"rendu -> {out}  ({len(html)} octets)")
 
 
-def slice_section(sid, nextid):
-    i = html.find(f'id="{sid}"')
-    j = html.find(f'id="{nextid}"') if nextid else len(html)
-    return html[i:j] if i != -1 else ""
+def between(start, end):
+    """Tranche de `html` entre le premier `start` et le `end` suivant."""
+    i = html.find(start)
+    if i == -1:
+        return ""
+    j = html.find(end, i + len(start)) if end else -1
+    return html[i:j] if j != -1 else html[i:]
 
 
 problems = []
@@ -57,23 +61,29 @@ for bad in ("Undefined", "<strong></strong>", "<strong> </strong>"):
     if bad in html:
         problems.append(f"présence de {bad!r}")
 
-for m in re.finditer(r'<p class="meta">(.*?)</p>', html, re.S):
+# Les cinq vues doivent être rendues.
+for view in ("accueil", "apropos", "projets", "parcours", "contact"):
+    if f'data-view="{view}"' not in html:
+        problems.append(f"vue absente : data-view=\"{view}\"")
+
+# Ligne meta concaténée des projets : pas de séparateur ' · ' orphelin.
+for m in re.finditer(r'<p class="project__meta">(.*?)</p>', html, re.S):
     seg = " ".join(m.group(1).split())
     if not seg:
-        problems.append("ligne <p class=\"meta\"> vide")
+        problems.append('ligne <p class="project__meta"> vide')
     elif seg.startswith("·") or seg.endswith("·") or "· ·" in seg:
         problems.append(f"séparateur ' · ' orphelin : {seg!r}")
 
+# Nombre de cartes rendues == nombre d'entrées dans content.py.
+projets_html = between('id="projets"', 'id="parcours"')
+parcours_html = between('id="parcours"', 'id="contact"')
+exp_html = parcours_html.split(">Formations<")[0]
+form_html = parcours_html.split(">Formations<")[1] if ">Formations<" in parcours_html else ""
+
 card_counts = {
-    "projets": (len(content.projets), html.count("project-card")),
-    "experiences": (
-        len(content.experiences),
-        slice_section("experiences", "formations").count('<article class="card">'),
-    ),
-    "formations": (
-        len(content.formations),
-        slice_section("formations", "projets").count('<article class="card">'),
-    ),
+    "projets": (len(content.projets), projets_html.count('<article class="project">')),
+    "experiences": (len(content.experiences), exp_html.count('<article class="entry">')),
+    "formations": (len(content.formations), form_html.count('<article class="entry">')),
 }
 for name, (want, got) in card_counts.items():
     mark = "ok" if want == got else "MISMATCH"
