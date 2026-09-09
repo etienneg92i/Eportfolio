@@ -19,7 +19,7 @@ profil = {
     "telephone": "",
     "localisation": "Paris, France",
     "github": "https://github.com/etienneg92i",
-    "linkedin": "",
+    "linkedin": "https://www.linkedin.com/in/etienne-girard-207a95281",
 }
 
 faits = [

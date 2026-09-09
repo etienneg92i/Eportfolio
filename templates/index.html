@@ -135,6 +135,12 @@
                                 <a class="contact-list__value" href="{{ profil.github }}" target="_blank" rel="noopener">{{ profil.github | replace('https://', '') }}</a>
                             </li>
                             {% endif %}
+                            {% if profil.linkedin %}
+                            <li>
+                                <span class="contact-list__label">LinkedIn</span>
+                                <a class="contact-list__value" href="{{ profil.linkedin }}" target="_blank" rel="noopener">{{ profil.linkedin | replace('https://', '') }}</a>
+                            </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -240,18 +246,18 @@
                         <a class="contact-band__value" href="{{ profil.github }}" target="_blank" rel="noopener">{{ profil.github | replace('https://', '') }}</a>
                     </div>
                     {% endif %}
+                    {% if profil.linkedin %}
+                    <div class="contact-band__cell">
+                        <p class="contact-band__label">LinkedIn</p>
+                        <a class="contact-band__value" href="{{ profil.linkedin }}" target="_blank" rel="noopener">{{ profil.linkedin | replace('https://', '') }}</a>
+                    </div>
+                    {% endif %}
                     {% if profil.localisation %}
                     <div class="contact-band__cell">
                         <p class="contact-band__label">Localisation</p>
                         <p class="contact-band__value">{{ profil.localisation }}</p>
                     </div>
                     {% endif %}
-                </div>
-            </div>
-
-            <div class="poster">
-                <div class="poster__inner">
-                    <p>Ouvert au réseau et aux nouvelles missions.</p>
                 </div>
             </div>
         </section>
@@ -263,6 +269,7 @@
             <span class="site-footer__links">
                 {% if profil.email %}<a href="mailto:{{ profil.email }}">E-mail</a>{% endif %}
                 {% if profil.github %}<a href="{{ profil.github }}" target="_blank" rel="noopener">GitHub</a>{% endif %}
+                {% if profil.linkedin %}<a href="{{ profil.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>{% endif %}
             </span>
         </div>
     </footer>
