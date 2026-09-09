@@ -103,6 +103,7 @@ experiences = [
     {
         "titre": "Alternant Data — service Finance",
         "organisation": "Décathlon",
+        "logo": "logos/decathlon.webp",
         "lieu": "",
         "periode": "depuis 2026",
         "description": (
@@ -114,6 +115,7 @@ experiences = [
     {
         "titre": "Événementiel — FFF Tour",
         "organisation": "Fédération Française de Football",
+        "logo": "logos/fff.webp",
         "lieu": "France",
         "periode": "juil. – août 2024 · 2 mois",
         "description": (
@@ -124,6 +126,7 @@ experiences = [
     {
         "titre": "Chef de rang",
         "organisation": "Hyatt Paris Madeleine",
+        "logo": "logos/hyatt.png",
         "lieu": "Paris",
         "periode": "sept. – déc. 2023 · 4 mois",
         "description": (
@@ -134,6 +137,7 @@ experiences = [
     {
         "titre": "Stage associatif",
         "organisation": "Pic-Pic Environnement",
+        "logo": "",
         "lieu": "Issy-les-Moulineaux",
         "periode": "2023 · 4 semaines",
         "description": (
@@ -144,6 +148,7 @@ experiences = [
     {
         "titre": "Stage de découverte — ingénierie",
         "organisation": "Flying Whales",
+        "logo": "",
         "lieu": "Suresnes",
         "periode": "2020 · 1 mois",
         "description": (
@@ -157,6 +162,7 @@ formations = [
     {
         "titre": "Diplôme d'ingénieur — Majeure Data & IA",
         "organisation": "EPF École d'ingénieurs",
+        "logo": "logos/epf.png",
         "lieu": "Montpellier",
         "periode": "depuis 2021",
         "description": (
@@ -167,6 +173,7 @@ formations = [
     {
         "titre": "Semestre d'échange — Facultad de Ingeniería",
         "organisation": "Universidad de Buenos Aires (UBA)",
+        "logo": "logos/fiuba.png",
         "lieu": "Buenos Aires, Argentine",
         "periode": "août – déc. 2025",
         "description": "Semestre international en école d'ingénieurs.",
@@ -174,6 +181,7 @@ formations = [
     {
         "titre": "Baccalauréat général",
         "organisation": "Lycée Petit-Champs",
+        "logo": "",
         "lieu": "Paris",
         "periode": "2021",
         "description": (

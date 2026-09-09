@@ -486,6 +486,16 @@ a.contact-list__value { word-break: break-all; }
   grid-template-columns: minmax(160px, 220px) 1fr;
   gap: 32px;
 }
+.entry__logo {
+  display: block;
+  max-width: 120px;
+  max-height: 40px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: left;
+  margin-bottom: 14px;
+}
 .entry__period {
   margin: 0 0 4px;
   font-size: 13px;
