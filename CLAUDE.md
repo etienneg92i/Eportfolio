@@ -12,6 +12,10 @@ Système visuel « Modernist » dans `static/style.css` (tokens + composants),
 `content.py` reste la source unique de contenu. Pas de base de données, pas
 d'authentification.
 
+Décision de design et spec au pixel :
+[`docs/adr/0001-systeme-visuel-modernist.md`](docs/adr/0001-systeme-visuel-modernist.md)
+et [`docs/design/refonte-modernist-handoff.md`](docs/design/refonte-modernist-handoff.md).
+
 - **Contenu du site** : `content.py` (profil, compétences, projets, expériences,
   formations). C'est la source unique de vérité — éditer ce fichier puis commiter.
 - **Lancer en local** : `conda activate data_manipulation` puis `uvicorn main:app --reload`
