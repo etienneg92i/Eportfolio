@@ -9,12 +9,13 @@ profil = {
     "titre": "Étudiant ingénieur — Majeure Data & IA",
     "accroche": "Data Scientist en alternance chez Décathlon — équipe Finance Data",
     "presentation": (
-        "Data Scientist en alternance chez Décathlon, au sein de l'équipe "
-        "Finance Data. J'y applique l'analyse exploratoire, la modélisation et "
-        "le machine learning aux données financières et business. Élève "
-        "ingénieur à l'EPF (Majeure Data & IA), mon parcours s'est construit "
-        "autour de projets menés en équipe pour des commanditaires réels et "
-        "d'un semestre d'échange à Buenos Aires."
+        "J'applique l'analyse exploratoire, la modélisation et le machine "
+        "learning aux données financières et business de l'équipe Finance Data. "
+        "Je travaille sur des sujets concrets, du nettoyage des données au "
+        "modèle qui outille la décision. Élève ingénieur à l'EPF en Majeure "
+        "Data & IA, mon parcours s'est aussi construit autour de projets menés "
+        "en équipe pour des commanditaires réels et d'un semestre d'échange à "
+        "Buenos Aires."
     ),
     "email": "etienne.p.girard@gmail.com",
     "telephone": "",
