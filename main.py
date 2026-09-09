@@ -8,6 +8,7 @@ from fastapi.templating import Jinja2Templates
 from content import (
     competences,
     experiences,
+    faits,
     formations,
     interets,
     langues,
@@ -37,6 +38,7 @@ def accueil(request: Request):
         "index.html",
         {
             "profil": profil,
+            "faits": faits,
             "competences": competences,
             "langues": langues,
             "interets": interets,

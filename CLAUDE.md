@@ -4,8 +4,13 @@ Guidance for agents working in this repository.
 
 ## Le projet
 
-ePortfolio statique : FastAPI + Jinja2, une seule page (`templates/index.html`).
-Pas de base de données, pas d'authentification.
+ePortfolio statique : FastAPI + Jinja2, une seule route (`GET /`) et un seul
+gabarit (`templates/index.html`). La page rend cinq vues (Accueil, À propos,
+Projets, Parcours, Contact) que l'utilisateur bascule côté client par ancre
+(`#accueil`, `#apropos`, …) ; sans JS, les cinq sections restent empilées.
+Système visuel « Modernist » dans `static/style.css` (tokens + composants),
+`content.py` reste la source unique de contenu. Pas de base de données, pas
+d'authentification.
 
 - **Contenu du site** : `content.py` (profil, compétences, projets, expériences,
   formations). C'est la source unique de vérité — éditer ce fichier puis commiter.
