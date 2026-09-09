@@ -7,15 +7,14 @@ mettre a jour le contenu. Aucune base de donnees, aucun mode admin.
 profil = {
     "nom": "Etienne Girard",
     "titre": "Étudiant ingénieur — Majeure Data & IA",
-    "accroche": "En apprentissage Data Scientist dans l'équipe Finance Data de Décathlon depuis 2026",
+    "accroche": "Data Scientist en alternance chez Décathlon — équipe Finance Data",
     "presentation": (
-        "Je mets la donnée au service de la décision : analyse exploratoire, "
-        "modélisation et machine learning. J'aime les projets où le résultat "
-        "se voit et se mesure. Mon parcours d'ingénieur généraliste s'est "
-        "construit autour de projets en équipe pour des commanditaires réels "
-        "et d'un semestre d'échange à Buenos Aires ; je le prolonge aujourd'hui "
-        "en apprentissage Data Scientist dans la Finance, avec l'objectif d'un "
-        "poste Data ou IA à la clé."
+        "Data Scientist en alternance chez Décathlon, au sein de l'équipe "
+        "Finance Data. J'y applique l'analyse exploratoire, la modélisation et "
+        "le machine learning aux données financières et business. Élève "
+        "ingénieur à l'EPF (Majeure Data & IA), mon parcours s'est construit "
+        "autour de projets menés en équipe pour des commanditaires réels et "
+        "d'un semestre d'échange à Buenos Aires."
     ),
     "email": "etienne.p.girard@gmail.com",
     "telephone": "",
@@ -25,11 +24,11 @@ profil = {
 }
 
 faits = [
-    {"libelle": "Recherche", "valeur": "Poste Data / IA — 2026"},
-    {"libelle": "Diplôme", "valeur": "Ingénieur EPF, promo 2026"},
+    {"libelle": "Poste", "valeur": "Data Scientist en alternance"},
+    {"libelle": "Entreprise", "valeur": "Décathlon — Finance Data"},
+    {"libelle": "École", "valeur": "EPF, Majeure Data & IA"},
     {"libelle": "International", "valeur": "Semestre à Buenos Aires"},
-    {"libelle": "Terrain", "valeur": "7 semaines pour Eau d'Azur"},
-    {"libelle": "Mobilité", "valeur": "Paris & Île-de-France"},
+    {"libelle": "Base", "valeur": "Paris, France"},
 ]
 
 competences = [
