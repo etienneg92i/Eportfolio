@@ -7,13 +7,15 @@ mettre a jour le contenu. Aucune base de donnees, aucun mode admin.
 profil = {
     "nom": "Etienne Girard",
     "titre": "Étudiant ingénieur — Majeure Data & IA",
-    "accroche": "Alternant Data Finance chez Décathlon — en poste depuis 2026",
+    "accroche": "En apprentissage Data Scientist dans l'équipe Finance Data de Décathlon depuis 2026",
     "presentation": (
-        "Étudiant ingénieur à l'EPF, spécialisé en Data et Intelligence "
-        "Artificielle, actuellement en alternance dans le service Finance de "
-        "Décathlon. Fort intérêt pour l'analyse de données, la programmation et "
-        "les projets à impact concret. Sérieux, motivé et adaptable, je mets la "
-        "data au service de la décision."
+        "Je mets la donnée au service de la décision : analyse exploratoire, "
+        "modélisation et machine learning. J'aime les projets où le résultat "
+        "se voit et se mesure. Mon parcours d'ingénieur généraliste s'est "
+        "construit autour de projets en équipe pour des commanditaires réels "
+        "et d'un semestre d'échange à Buenos Aires ; je le prolonge aujourd'hui "
+        "en apprentissage Data Scientist dans la Finance, avec l'objectif d'un "
+        "poste Data ou IA à la clé."
     ),
     "email": "etienne.p.girard@gmail.com",
     "telephone": "",
@@ -23,21 +25,23 @@ profil = {
 }
 
 faits = [
-    {"libelle": "Poste", "valeur": "Alternant Data — Finance"},
-    {"libelle": "Entreprise", "valeur": "Décathlon"},
-    {"libelle": "École", "valeur": "EPF — Majeure Data & IA"},
-    {"libelle": "Base", "valeur": "Paris, France"},
-    {"libelle": "Langues", "valeur": "FR · EN B2 · ES B2"},
+    {"libelle": "Recherche", "valeur": "Poste Data / IA — 2026"},
+    {"libelle": "Diplôme", "valeur": "Ingénieur EPF, promo 2026"},
+    {"libelle": "International", "valeur": "Semestre à Buenos Aires"},
+    {"libelle": "Terrain", "valeur": "7 semaines pour Eau d'Azur"},
+    {"libelle": "Mobilité", "valeur": "Paris & Île-de-France"},
 ]
 
 competences = [
     {
         "categorie": "Programmation & Data",
         "items": [
-            "Python (analyse de données, scripting)",
+            "Python (Pandas, NumPy, scikit-learn)",
+            "Machine learning : régression, classification, clustering",
             "R / RStudio",
+            "MySQL / SQL",
+            "Databricks",
             "MATLAB",
-            "MySQL",
             "VBA",
             "Bases en JavaScript",
         ],
@@ -53,9 +57,9 @@ competences = [
     {
         "categorie": "Savoir-être",
         "items": [
-            "Travail en équipe et communication",
+            "Travail en équipe transverse et communication",
             "Autonomie et capacité d'adaptation",
-            "Esprit projet",
+            "Esprit projet et méthodes agiles",
         ],
     },
 ]
@@ -67,9 +71,8 @@ langues = [
 ]
 
 interets = [
-    "Football & tennis",
+    "Football et tennis",
     "Voyages : Japon, États-Unis, Brésil, Tanzanie, Angleterre, Argentine, Canada",
-    "Ouvert au réseau",
 ]
 
 projets = [
@@ -79,9 +82,11 @@ projets = [
         "organisation": "Eau d'Azur",
         "periode": "2026 · 7 semaines",
         "description": (
-            "Outil d'aide à la décision pour automatiser la planification du "
-            "renouvellement des réseaux d'eau potable : analyse de données, "
-            "logique d'optimisation et application web de visualisation."
+            "Commande d'Eau d'Azur : automatiser la planification du "
+            "renouvellement des canalisations d'eau potable. Travail d'équipe "
+            "sur l'analyse des données réseau et la logique de priorisation, "
+            "livré sous forme d'une application web qui cartographie les "
+            "tronçons à renouveler et l'ordre d'intervention."
         ),
         "technos": ["Python", "R", "Analyse de données", "Optimisation"],
     },
@@ -91,9 +96,9 @@ projets = [
         "organisation": "",
         "periode": "2025 · 4 semaines",
         "description": (
-            "Conception et construction d'une borne d'arcade fonctionnelle : "
-            "assemblage matériel, connectique, connexions électroniques et "
-            "intégration du système."
+            "Construction en équipe d'une borne d'arcade jouable, de la "
+            "structure à l'électronique : assemblage, connectique et "
+            "intégration du système. Livrable : une borne fonctionnelle."
         ),
         "technos": ["Électronique", "Hardware", "Intégration système"],
     },
@@ -101,15 +106,18 @@ projets = [
 
 experiences = [
     {
-        "titre": "Alternant Data — service Finance",
+        "titre": "Data Scientist en apprentissage — Finance Data",
         "organisation": "Décathlon",
         "logo": "logos/decathlon.webp",
         "lieu": "",
         "periode": "depuis 2026",
         "description": (
-            "Analyse et valorisation de données financières : automatisation de "
-            "reportings, indicateurs de pilotage et outils d'aide à la décision "
-            "pour les équipes Finance."
+            "Data science appliquée aux données financières et business de "
+            "Décathlon : analyse exploratoire, préparation des données et "
+            "modèles (régression, classification, clustering) pour outiller la "
+            "décision. Travail en équipe transverse — data engineers, data "
+            "analysts, product managers — en méthode agile. Stack Python/R, "
+            "Pandas, scikit-learn, Databricks, SQL."
         ),
     },
     {
@@ -119,8 +127,10 @@ experiences = [
         "lieu": "France",
         "periode": "juil. – août 2024 · 2 mois",
         "description": (
-            "Participation à la tournée estivale « FFF Tour » sur les plages "
-            "françaises. Découverte de l'événementiel."
+            "Participation à la tournée estivale de la FFF sur les plages "
+            "françaises. Première expérience de l'événementiel de terrain : "
+            "logistique quotidienne et travail en équipe sur un format "
+            "itinérant."
         ),
     },
     {
@@ -130,8 +140,8 @@ experiences = [
         "lieu": "Paris",
         "periode": "sept. – déc. 2023 · 4 mois",
         "description": (
-            "Service en hôtel 5 étoiles. Sens du service client, travail en "
-            "équipe et gestion d'un environnement exigeant."
+            "Service en salle dans un hôtel 5 étoiles. Exigence sur la qualité, "
+            "gestion de la pression du service et coordination en équipe."
         ),
     },
     {
@@ -141,8 +151,8 @@ experiences = [
         "lieu": "Issy-les-Moulineaux",
         "periode": "2023 · 4 semaines",
         "description": (
-            "Sensibilisation à la protection de l'environnement et animation "
-            "d'ateliers pédagogiques dans des écoles."
+            "Sensibilisation à l'environnement en milieu scolaire : animation "
+            "d'ateliers pédagogiques auprès d'élèves."
         ),
     },
     {
@@ -152,8 +162,8 @@ experiences = [
         "lieu": "Suresnes",
         "periode": "2020 · 1 mois",
         "description": (
-            "Observation du travail d'ingénieurs et découverte du secteur des "
-            "dirigeables industriels."
+            "Stage d'observation : découverte du métier d'ingénieur et du "
+            "secteur des dirigeables industriels."
         ),
     },
 ]
@@ -166,8 +176,8 @@ formations = [
         "lieu": "Montpellier",
         "periode": "depuis 2021",
         "description": (
-            "Formation d'ingénieur généraliste, spécialisation Data et "
-            "Intelligence Artificielle."
+            "Cycle ingénieur généraliste, spécialisation Data et Intelligence "
+            "Artificielle en dernière année."
         ),
     },
     {
@@ -176,7 +186,10 @@ formations = [
         "logo": "logos/fiuba.png",
         "lieu": "Buenos Aires, Argentine",
         "periode": "août – déc. 2025",
-        "description": "Semestre international en école d'ingénieurs.",
+        "description": (
+            "Mobilité académique d'un semestre à la faculté d'ingénierie, en "
+            "espagnol."
+        ),
     },
     {
         "titre": "Baccalauréat général",
