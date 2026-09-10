@@ -76,3 +76,14 @@ def test_url_css_porte_l_empreinte_de_version():
     from main import CSS_VERSION
 
     assert f"style.css?v={CSS_VERSION}" in client.get("/").text
+
+
+def test_lien_d_evitement_pointe_le_contenu():
+    html = client.get("/").text
+    assert '<a class="skip-link" href="#contenu">' in html
+    assert 'id="contenu"' in html
+
+
+def test_feuille_de_style_a_un_bloc_impression():
+    css = client.get("/static/style.css").text
+    assert "@media print" in css
