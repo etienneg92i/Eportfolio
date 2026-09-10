@@ -87,3 +87,20 @@ def test_lien_d_evitement_pointe_le_contenu():
 def test_feuille_de_style_a_un_bloc_impression():
     css = client.get("/static/style.css").text
     assert "@media print" in css
+
+
+def test_icones_et_theme_color_dans_le_head():
+    html = client.get("/").text
+    assert 'rel="icon"' in html and "favicon.svg" in html
+    assert 'rel="apple-touch-icon"' in html
+    assert '<meta name="theme-color"' in html
+    assert client.get("/static/favicon.svg").status_code == 200
+
+
+def test_portrait_servi_en_webp_avec_fallback():
+    html = client.get("/").text
+    assert "<picture>" in html
+    assert "portrait.webp" in html and "portrait.jpg" in html
+    r = client.get("/static/portrait.webp")
+    assert r.status_code == 200
+    assert len(r.content) < 100_000  # l'original faisait 733 Ko
