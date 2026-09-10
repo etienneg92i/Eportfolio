@@ -192,6 +192,13 @@
                         </div>
                         <div>
                             <p class="project__desc">{{ projet.description }}</p>
+                            {% if projet.liens %}
+                            <ul class="project__links">
+                                {% for lien in projet.liens %}
+                                <li><a href="{{ lien.url }}" target="_blank" rel="noopener">{{ lien.libelle }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
                             {% if projet.technos %}
                             <ul class="project__tags">
                                 {% for techno in projet.technos %}

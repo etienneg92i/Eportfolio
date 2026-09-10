@@ -97,6 +97,35 @@ def test_icones_et_theme_color_dans_le_head():
     assert client.get("/static/favicon.svg").status_code == 200
 
 
+def test_carte_projet_affiche_les_liens_optionnels():
+    """Le champ optionnel `liens` d'un projet rend un lien ; absent, rien."""
+    from jinja2 import Environment, FileSystemLoader, StrictUndefined
+
+    env = Environment(loader=FileSystemLoader("templates"), undefined=StrictUndefined)
+    env.globals["url_for"] = lambda *a, **k: "#"
+    ctx = {
+        k: getattr(content, k)
+        for k in (
+            "profil", "faits", "competences", "langues",
+            "interets", "experiences", "formations",
+        )
+    }
+    base = {"cadre": "", "organisation": "", "periode": "", "technos": []}
+    avec = {
+        **base, "titre": "P", "description": "D",
+        "liens": [{"libelle": "Code source", "url": "https://github.com/x/y"}],
+    }
+    sans = {**base, "titre": "Q", "description": "E", "liens": []}
+    html = env.get_template("index.html").render(
+        projets=[avec, sans], css_version=1, **ctx
+    )
+    assert (
+        '<a href="https://github.com/x/y" target="_blank" rel="noopener">Code source</a>'
+        in html
+    )
+    assert html.count('class="project__links"') == 1  # `liens` vide -> pas de bloc
+
+
 def test_page_404_personnalisee():
     r = client.get("/cette-page-nexiste-pas")
     assert r.status_code == 404

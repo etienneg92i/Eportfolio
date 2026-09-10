@@ -48,3 +48,18 @@ def test_technos_doit_etre_une_liste_de_chaines(monkeypatch):
     monkeypatch.setattr(content, "projets", [projet])
     with pytest.raises(ValueError, match="technos"):
         content._valider()
+
+
+def test_liens_bien_formes_sont_acceptes(monkeypatch):
+    projet = dict(content.projets[0])
+    projet["liens"] = [{"libelle": "Code source", "url": "https://github.com/x/y"}]
+    monkeypatch.setattr(content, "projets", [projet])
+    content._valider()  # ne doit rien lever
+
+
+def test_lien_sans_url_est_rejete(monkeypatch):
+    projet = dict(content.projets[0])
+    projet["liens"] = [{"libelle": "Démo"}]
+    monkeypatch.setattr(content, "projets", [projet])
+    with pytest.raises(ValueError, match="liens"):
+        content._valider()

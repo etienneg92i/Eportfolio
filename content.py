@@ -88,6 +88,10 @@ projets = [
             "tronçons à renouveler et l'ordre d'intervention."
         ),
         "technos": ["Python", "R", "Analyse de données", "Optimisation"],
+        # "liens" : liste de {libelle, url}, vide si aucun. Le libelle nomme le
+        # Livrable ou sa source ("Application web", "Code source", "Démo"),
+        # jamais une Techno.
+        "liens": [],
     },
     {
         "titre": "Borne d'arcade",
@@ -100,6 +104,7 @@ projets = [
             "intégration du système. Livrable : une borne fonctionnelle."
         ),
         "technos": ["Électronique", "Hardware", "Intégration système"],
+        "liens": [],
     },
 ]
 
@@ -243,7 +248,7 @@ def _valider():
         ("faits", faits, ("libelle", "valeur"), ()),
         ("langues", langues, ("langue", "niveau"), ()),
         ("projets", projets, ("titre", "description"),
-         ("cadre", "organisation", "periode", "technos")),
+         ("cadre", "organisation", "periode", "technos", "liens")),
         ("experiences", experiences, ("titre", "description"),
          ("organisation", "logo", "lieu", "periode")),
         ("formations", formations, ("titre", "description"),
@@ -274,6 +279,19 @@ def _valider():
                 erreurs.setdefault(nom, []).append(
                     f"[{i}] `technos`, si present, est une liste de chaines non vides"
                 )
+
+    for i, row in enumerate(projets if isinstance(projets, list) else []):
+        liens = row.get("liens") if isinstance(row, dict) else None
+        if liens is not None and not (
+            isinstance(liens, list)
+            and all(
+                isinstance(x, dict) and _texte(x.get("libelle")) and _texte(x.get("url"))
+                for x in liens
+            )
+        ):
+            erreurs.setdefault("projets", []).append(
+                f"[{i}] `liens`, si present, est une liste de {{libelle, url}} non vides"
+            )
 
     if erreurs:
         lignes = "\n".join(

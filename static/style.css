@@ -491,6 +491,27 @@ a.contact-list__value { word-break: break-all; }
   line-height: 1.65;
   color: var(--color-neutral-800);
 }
+.project__links {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+.project__links a {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-accent-700);
+  text-decoration: none;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 2px;
+}
+.project__links a:hover { color: var(--color-accent-600); }
+
 .project__tags {
   list-style: none;
   margin: 0;

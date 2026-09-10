@@ -41,8 +41,8 @@ Le travail est vérifié quand, pour **chaque section touchée par le diff** :
 - [ ] La bascule de vue fonctionne : ouvrir `_render.html` ne montre qu'une vue
       à la fois une fois le JS chargé, et les cinq `data-view` sont présents.
 - [ ] Si tu as ajouté ou retiré un champ **optionnel** d'un dict (un champ que
-      d'autres entrées laissent vide, ex. `organisation`, `lieu`, `linkedin`),
-      tu as aussi vérifié le rendu d'une entrée où ce champ est vide.
+      d'autres entrées laissent vide, ex. `organisation`, `lieu`, `linkedin`,
+      `liens`), tu as aussi vérifié le rendu d'une entrée où ce champ est vide.
 
 `scripts/render.py` vérifie automatiquement les points 2 à 5 (délimiteurs Jinja,
 méta orpheline, nombre de cartes, présence des cinq `data-view`) et sort en
