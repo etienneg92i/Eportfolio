@@ -43,6 +43,19 @@ out = Path(sys.argv[1]) if len(sys.argv) > 1 else REPO / "_render.html"
 out.write_text(html, encoding="utf-8")
 print(f"rendu -> {out}  ({len(html)} octets)")
 
+# La page 404 partage header/footer et le systeme visuel : elle doit rendre.
+try:
+    html_404 = env.get_template("404.html").render(
+        profil=content.profil, css_version=1
+    )
+    if "{{" in html_404 or "}}" in html_404 or "Undefined" in html_404:
+        print("ECHEC RENDU 404.html : delimiteur Jinja ou Undefined dans la sortie")
+        sys.exit(1)
+    print(f"rendu 404.html OK  ({len(html_404)} octets)")
+except Exception as exc:
+    print(f"ECHEC RENDU 404.html : {type(exc).__name__}: {exc}")
+    sys.exit(1)
+
 
 def between(start, end):
     """Tranche de `html` entre le premier `start` et le `end` suivant."""

@@ -42,6 +42,17 @@ def _css_version() -> str:
 CSS_VERSION = _css_version()
 
 
+@app.exception_handler(404)
+async def page_introuvable(request: Request, exc):
+    """Page 404 maison : header/footer et systeme visuel du site, lien retour."""
+    return templates.TemplateResponse(
+        request,
+        "404.html",
+        {"profil": profil, "css_version": CSS_VERSION},
+        status_code=404,
+    )
+
+
 @app.get("/", response_class=HTMLResponse)
 def accueil(request: Request):
     return templates.TemplateResponse(

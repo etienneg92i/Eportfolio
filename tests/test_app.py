@@ -97,6 +97,17 @@ def test_icones_et_theme_color_dans_le_head():
     assert client.get("/static/favicon.svg").status_code == 200
 
 
+def test_page_404_personnalisee():
+    r = client.get("/cette-page-nexiste-pas")
+    assert r.status_code == 404
+    assert "text/html" in r.headers["content-type"]
+    html = r.text
+    assert "Page<br>introuvable" in html or "introuvable" in html
+    assert 'href="/"' in html  # lien retour vers l'accueil
+    assert rendu(content.profil["nom"]) in html  # header/footer partages
+    assert "{{" not in html and "}}" not in html
+
+
 def test_portrait_servi_en_webp_avec_fallback():
     html = client.get("/").text
     assert "<picture>" in html

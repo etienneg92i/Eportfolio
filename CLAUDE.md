@@ -4,8 +4,10 @@ Guidance for agents working in this repository.
 
 ## Le projet
 
-ePortfolio statique : FastAPI + Jinja2, une seule route (`GET /`) et un seul
-gabarit (`templates/index.html`). La page rend cinq vues (Accueil, À propos,
+ePortfolio statique : FastAPI + Jinja2, une seule route de contenu (`GET /`)
+rendue par `templates/index.html`, plus une page d'erreur `templates/404.html`
+(handler `404` dans `main.py`). Header et pied de page sont partagés via
+`templates/partials/`. La page rend cinq vues (Accueil, À propos,
 Formation & projets, Expérience, Contact) que l'utilisateur bascule côté client
 par ancre (`#accueil`, `#apropos`, `#parcours`, `#experience`, `#contact`) ;
 sans JS, les cinq sections restent empilées.

@@ -582,6 +582,16 @@ a.contact-list__value { word-break: break-all; }
 }
 a.contact-band__value { word-break: break-all; }
 
+/* ══ Page 404 ═══════════════════════════════════════════════════════════════ */
+a.brand { text-decoration: none; color: inherit; }
+.error-404__text {
+  margin: 0 0 40px;
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 46ch;
+  color: var(--color-neutral-800);
+}
+
 /* ══ Responsive ═════════════════════════════════════════════════════════════ */
 @media (max-width: 900px) {
   .facts__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

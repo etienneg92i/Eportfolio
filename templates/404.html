@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page introuvable — {{ profil.nom }}</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="{{ url_for('static', path='favicon.svg') }}" type="image/svg+xml">
+    <link rel="icon" href="{{ url_for('static', path='favicon.png') }}" sizes="96x96" type="image/png">
+    <link rel="apple-touch-icon" href="{{ url_for('static', path='apple-touch-icon.png') }}">
+    <meta name="theme-color" content="#f3f2f2">
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}?v={{ css_version }}">
+</head>
+
+<body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a class="brand" href="/">
+                <span class="brand__name">{{ profil.nom }}</span>
+                <span class="brand__role">Data &amp; IA</span>
+            </a>
+        </div>
+    </header>
+
+    <main id="contenu" tabindex="-1">
+        <section class="view is-active">
+            <div class="container container--view error-404">
+                <span class="view__eyebrow">Erreur 404</span>
+                <h1 class="view__title">Page<br>introuvable</h1>
+                <p class="error-404__text">
+                    Cette adresse ne mène nulle part — la page a peut-être été déplacée,
+                    ou n'a jamais existé.
+                </p>
+                <a href="/" class="btn btn-primary">Retour à l'accueil</a>
+            </div>
+        </section>
+    </main>
+
+    {% include "partials/footer.html" %}
+</body>
+
+</html>
