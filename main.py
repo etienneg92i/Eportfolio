@@ -1,3 +1,4 @@
+import hashlib
 from pathlib import Path
 
 from fastapi import FastAPI, Request
@@ -24,11 +25,21 @@ app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 
-def get_css_version() -> int:
-    """Horodatage du CSS pour forcer le rafraichissement du cache navigateur."""
-    if CSS_FILE.exists():
-        return CSS_FILE.stat().st_mtime_ns
-    return 1
+def _css_version() -> str:
+    """Empreinte du contenu CSS pour le cache-busting.
+
+    Un hash du fichier, pas son mtime : deux instances qui servent le meme CSS
+    donnent la meme URL `?v=`, quel que soit l'ordre des checkouts ou des
+    deploiements. Calcule une fois a l'import ; `--reload` relance le process
+    quand `style.css` change en dev.
+    """
+    try:
+        return hashlib.sha256(CSS_FILE.read_bytes()).hexdigest()[:8]
+    except OSError:
+        return "dev"
+
+
+CSS_VERSION = _css_version()
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -45,6 +56,6 @@ def accueil(request: Request):
             "projets": projets,
             "experiences": experiences,
             "formations": formations,
-            "css_version": get_css_version(),
+            "css_version": CSS_VERSION,
         },
     )

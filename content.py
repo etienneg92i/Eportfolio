@@ -7,13 +7,15 @@ mettre a jour le contenu. Aucune base de donnees, aucun mode admin.
 profil = {
     "nom": "Etienne Girard",
     "titre": "Étudiant ingénieur — Majeure Data & IA",
-    "accroche": "Alternant Data Finance chez Décathlon — en poste depuis 2026",
+    "accroche": "Data Scientist en alternance chez Décathlon — équipe Finance Data",
     "presentation": (
-        "Étudiant ingénieur à l'EPF, spécialisé en Data et Intelligence "
-        "Artificielle, actuellement en alternance dans le service Finance de "
-        "Décathlon. Fort intérêt pour l'analyse de données, la programmation et "
-        "les projets à impact concret. Sérieux, motivé et adaptable, je mets la "
-        "data au service de la décision."
+        "J'applique l'analyse exploratoire, la modélisation et le machine "
+        "learning aux données financières et business de l'équipe Finance Data. "
+        "Je travaille sur des sujets concrets, du nettoyage des données au "
+        "modèle qui outille la décision. Élève ingénieur à l'EPF en Majeure "
+        "Data & IA, mon parcours s'est aussi construit autour de projets menés "
+        "en équipe pour des commanditaires réels et d'un semestre d'échange à "
+        "Buenos Aires."
     ),
     "email": "etienne.p.girard@gmail.com",
     "telephone": "",
@@ -23,21 +25,22 @@ profil = {
 }
 
 faits = [
-    {"libelle": "Poste", "valeur": "Alternant Data — Finance"},
-    {"libelle": "Entreprise", "valeur": "Décathlon"},
-    {"libelle": "École", "valeur": "EPF — Majeure Data & IA"},
+    {"libelle": "Poste", "valeur": "Data Scientist en alternance"},
+    {"libelle": "Entreprise", "valeur": "Décathlon — Finance Data"},
+    {"libelle": "École", "valeur": "EPF, Majeure Data & IA"},
     {"libelle": "Base", "valeur": "Paris, France"},
-    {"libelle": "Langues", "valeur": "FR · EN B2 · ES B2"},
 ]
 
 competences = [
     {
         "categorie": "Programmation & Data",
         "items": [
-            "Python (analyse de données, scripting)",
+            "Python (Pandas, NumPy, scikit-learn)",
+            "Machine learning : régression, classification, clustering",
             "R / RStudio",
+            "MySQL / SQL",
+            "Databricks",
             "MATLAB",
-            "MySQL",
             "VBA",
             "Bases en JavaScript",
         ],
@@ -53,9 +56,9 @@ competences = [
     {
         "categorie": "Savoir-être",
         "items": [
-            "Travail en équipe et communication",
+            "Travail en équipe transverse et communication",
             "Autonomie et capacité d'adaptation",
-            "Esprit projet",
+            "Esprit projet et méthodes agiles",
         ],
     },
 ]
@@ -67,9 +70,8 @@ langues = [
 ]
 
 interets = [
-    "Football & tennis",
+    "Football et tennis",
     "Voyages : Japon, États-Unis, Brésil, Tanzanie, Angleterre, Argentine, Canada",
-    "Ouvert au réseau",
 ]
 
 projets = [
@@ -79,9 +81,11 @@ projets = [
         "organisation": "Eau d'Azur",
         "periode": "2026 · 7 semaines",
         "description": (
-            "Outil d'aide à la décision pour automatiser la planification du "
-            "renouvellement des réseaux d'eau potable : analyse de données, "
-            "logique d'optimisation et application web de visualisation."
+            "Commande d'Eau d'Azur : automatiser la planification du "
+            "renouvellement des canalisations d'eau potable. Travail d'équipe "
+            "sur l'analyse des données réseau et la logique de priorisation, "
+            "livré sous forme d'une application web qui cartographie les "
+            "tronçons à renouveler et l'ordre d'intervention."
         ),
         "technos": ["Python", "R", "Analyse de données", "Optimisation"],
     },
@@ -91,9 +95,9 @@ projets = [
         "organisation": "",
         "periode": "2025 · 4 semaines",
         "description": (
-            "Conception et construction d'une borne d'arcade fonctionnelle : "
-            "assemblage matériel, connectique, connexions électroniques et "
-            "intégration du système."
+            "Construction en équipe d'une borne d'arcade jouable, de la "
+            "structure à l'électronique : assemblage, connectique et "
+            "intégration du système. Livrable : une borne fonctionnelle."
         ),
         "technos": ["Électronique", "Hardware", "Intégration système"],
     },
@@ -101,15 +105,18 @@ projets = [
 
 experiences = [
     {
-        "titre": "Alternant Data — service Finance",
+        "titre": "Data Scientist en apprentissage — Finance Data",
         "organisation": "Décathlon",
         "logo": "logos/decathlon.webp",
         "lieu": "",
         "periode": "depuis 2026",
         "description": (
-            "Analyse et valorisation de données financières : automatisation de "
-            "reportings, indicateurs de pilotage et outils d'aide à la décision "
-            "pour les équipes Finance."
+            "Data science appliquée aux données financières et business de "
+            "Décathlon : analyse exploratoire, préparation des données et "
+            "modèles (régression, classification, clustering) pour outiller la "
+            "décision. Travail en équipe transverse — data engineers, data "
+            "analysts, product managers — en méthode agile. Stack Python/R, "
+            "Pandas, scikit-learn, Databricks, SQL."
         ),
     },
     {
@@ -119,8 +126,10 @@ experiences = [
         "lieu": "France",
         "periode": "juil. – août 2024 · 2 mois",
         "description": (
-            "Participation à la tournée estivale « FFF Tour » sur les plages "
-            "françaises. Découverte de l'événementiel."
+            "Participation à la tournée estivale de la FFF sur les plages "
+            "françaises. Première expérience de l'événementiel de terrain : "
+            "logistique quotidienne et travail en équipe sur un format "
+            "itinérant."
         ),
     },
     {
@@ -130,8 +139,8 @@ experiences = [
         "lieu": "Paris",
         "periode": "sept. – déc. 2023 · 4 mois",
         "description": (
-            "Service en hôtel 5 étoiles. Sens du service client, travail en "
-            "équipe et gestion d'un environnement exigeant."
+            "Service en salle dans un hôtel 5 étoiles. Exigence sur la qualité, "
+            "gestion de la pression du service et coordination en équipe."
         ),
     },
     {
@@ -141,8 +150,8 @@ experiences = [
         "lieu": "Issy-les-Moulineaux",
         "periode": "2023 · 4 semaines",
         "description": (
-            "Sensibilisation à la protection de l'environnement et animation "
-            "d'ateliers pédagogiques dans des écoles."
+            "Sensibilisation à l'environnement en milieu scolaire : animation "
+            "d'ateliers pédagogiques auprès d'élèves."
         ),
     },
     {
@@ -152,8 +161,8 @@ experiences = [
         "lieu": "Suresnes",
         "periode": "2020 · 1 mois",
         "description": (
-            "Observation du travail d'ingénieurs et découverte du secteur des "
-            "dirigeables industriels."
+            "Stage d'observation : découverte du métier d'ingénieur et du "
+            "secteur des dirigeables industriels."
         ),
     },
 ]
@@ -166,8 +175,8 @@ formations = [
         "lieu": "Montpellier",
         "periode": "depuis 2021",
         "description": (
-            "Formation d'ingénieur généraliste, spécialisation Data et "
-            "Intelligence Artificielle."
+            "Cycle ingénieur généraliste, spécialisation Data et Intelligence "
+            "Artificielle en dernière année."
         ),
     },
     {
@@ -176,7 +185,10 @@ formations = [
         "logo": "logos/fiuba.png",
         "lieu": "Buenos Aires, Argentine",
         "periode": "août – déc. 2025",
-        "description": "Semestre international en école d'ingénieurs.",
+        "description": (
+            "Mobilité académique d'un semestre à la faculté d'ingénierie, en "
+            "espagnol."
+        ),
     },
     {
         "titre": "Baccalauréat général",
@@ -190,3 +202,85 @@ formations = [
         ),
     },
 ]
+
+
+# ── Garde-fou de contenu ────────────────────────────────────────────────────
+# Une entree mal formee (cle `titre` oubliee, `items` absent d'une categorie de
+# competences...) passe le hook de commit mais casse ou defigure le rendu. On
+# verifie ici la forme au moment de l'import : l'app refuse de demarrer, le test
+# `test_content` echoue, avec un message qui pointe l'entree fautive.
+
+def _texte(v):
+    return isinstance(v, str) and v.strip() != ""
+
+
+def _liste_de_dicts(rows, *, requis, optionnels=()):
+    """Retourne la liste des problemes pour une liste d'entrees `dict`."""
+    connus = set(requis) | set(optionnels)
+    problemes = []
+    if not isinstance(rows, list) or not rows:
+        return ["doit etre une liste non vide"]
+    for i, row in enumerate(rows):
+        if not isinstance(row, dict):
+            problemes.append(f"[{i}] n'est pas un dict")
+            continue
+        for cle in requis:
+            if not _texte(row.get(cle)):
+                problemes.append(f"[{i}] champ requis manquant ou vide : {cle!r}")
+        for cle in set(row) - connus:
+            problemes.append(f"[{i}] champ inconnu : {cle!r}")
+    return problemes
+
+
+def _valider():
+    erreurs = {}
+
+    manque = [c for c in ("nom", "titre", "presentation") if not _texte(profil.get(c))]
+    if manque:
+        erreurs["profil"] = [f"champ requis manquant ou vide : {c!r}" for c in manque]
+
+    for nom, rows, requis, opt in (
+        ("faits", faits, ("libelle", "valeur"), ()),
+        ("langues", langues, ("langue", "niveau"), ()),
+        ("projets", projets, ("titre", "description"),
+         ("cadre", "organisation", "periode", "technos")),
+        ("experiences", experiences, ("titre", "description"),
+         ("organisation", "logo", "lieu", "periode")),
+        ("formations", formations, ("titre", "description"),
+         ("organisation", "logo", "lieu", "periode")),
+    ):
+        p = _liste_de_dicts(rows, requis=requis, optionnels=opt)
+        if p:
+            erreurs[nom] = p
+
+    p = _liste_de_dicts(competences, requis=("categorie",), optionnels=("items",))
+    for i, groupe in enumerate(competences if isinstance(competences, list) else []):
+        items = groupe.get("items") if isinstance(groupe, dict) else None
+        if not isinstance(items, list) or not items or not all(_texte(x) for x in items):
+            p.append(f"[{i}] `items` doit etre une liste non vide de chaines")
+    if p:
+        erreurs["competences"] = p
+
+    if not isinstance(interets, list) or not all(_texte(x) for x in interets):
+        erreurs["interets"] = ["doit etre une liste de chaines non vides"]
+
+    for nom, rows in (("projets", projets), ("experiences", experiences),
+                      ("formations", formations)):
+        for i, row in enumerate(rows if isinstance(rows, list) else []):
+            technos = row.get("technos") if isinstance(row, dict) else None
+            if technos is not None and (
+                not isinstance(technos, list) or not all(_texte(x) for x in technos)
+            ):
+                erreurs.setdefault(nom, []).append(
+                    f"[{i}] `technos`, si present, est une liste de chaines non vides"
+                )
+
+    if erreurs:
+        lignes = "\n".join(
+            f"  {section} :\n" + "\n".join(f"    - {m}" for m in msgs)
+            for section, msgs in erreurs.items()
+        )
+        raise ValueError("content.py : contenu invalide\n" + lignes)
+
+
+_valider()
