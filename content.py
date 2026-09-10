@@ -202,3 +202,85 @@ formations = [
         ),
     },
 ]
+
+
+# ── Garde-fou de contenu ────────────────────────────────────────────────────
+# Une entree mal formee (cle `titre` oubliee, `items` absent d'une categorie de
+# competences...) passe le hook de commit mais casse ou defigure le rendu. On
+# verifie ici la forme au moment de l'import : l'app refuse de demarrer, le test
+# `test_content` echoue, avec un message qui pointe l'entree fautive.
+
+def _texte(v):
+    return isinstance(v, str) and v.strip() != ""
+
+
+def _liste_de_dicts(rows, *, requis, optionnels=()):
+    """Retourne la liste des problemes pour une liste d'entrees `dict`."""
+    connus = set(requis) | set(optionnels)
+    problemes = []
+    if not isinstance(rows, list) or not rows:
+        return ["doit etre une liste non vide"]
+    for i, row in enumerate(rows):
+        if not isinstance(row, dict):
+            problemes.append(f"[{i}] n'est pas un dict")
+            continue
+        for cle in requis:
+            if not _texte(row.get(cle)):
+                problemes.append(f"[{i}] champ requis manquant ou vide : {cle!r}")
+        for cle in set(row) - connus:
+            problemes.append(f"[{i}] champ inconnu : {cle!r}")
+    return problemes
+
+
+def _valider():
+    erreurs = {}
+
+    manque = [c for c in ("nom", "titre", "presentation") if not _texte(profil.get(c))]
+    if manque:
+        erreurs["profil"] = [f"champ requis manquant ou vide : {c!r}" for c in manque]
+
+    for nom, rows, requis, opt in (
+        ("faits", faits, ("libelle", "valeur"), ()),
+        ("langues", langues, ("langue", "niveau"), ()),
+        ("projets", projets, ("titre", "description"),
+         ("cadre", "organisation", "periode", "technos")),
+        ("experiences", experiences, ("titre", "description"),
+         ("organisation", "logo", "lieu", "periode")),
+        ("formations", formations, ("titre", "description"),
+         ("organisation", "logo", "lieu", "periode")),
+    ):
+        p = _liste_de_dicts(rows, requis=requis, optionnels=opt)
+        if p:
+            erreurs[nom] = p
+
+    p = _liste_de_dicts(competences, requis=("categorie",), optionnels=("items",))
+    for i, groupe in enumerate(competences if isinstance(competences, list) else []):
+        items = groupe.get("items") if isinstance(groupe, dict) else None
+        if not isinstance(items, list) or not items or not all(_texte(x) for x in items):
+            p.append(f"[{i}] `items` doit etre une liste non vide de chaines")
+    if p:
+        erreurs["competences"] = p
+
+    if not isinstance(interets, list) or not all(_texte(x) for x in interets):
+        erreurs["interets"] = ["doit etre une liste de chaines non vides"]
+
+    for nom, rows in (("projets", projets), ("experiences", experiences),
+                      ("formations", formations)):
+        for i, row in enumerate(rows if isinstance(rows, list) else []):
+            technos = row.get("technos") if isinstance(row, dict) else None
+            if technos is not None and (
+                not isinstance(technos, list) or not all(_texte(x) for x in technos)
+            ):
+                erreurs.setdefault(nom, []).append(
+                    f"[{i}] `technos`, si present, est une liste de chaines non vides"
+                )
+
+    if erreurs:
+        lignes = "\n".join(
+            f"  {section} :\n" + "\n".join(f"    - {m}" for m in msgs)
+            for section, msgs in erreurs.items()
+        )
+        raise ValueError("content.py : contenu invalide\n" + lignes)
+
+
+_valider()
