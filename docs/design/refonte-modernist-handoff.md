@@ -8,7 +8,7 @@
 
 ## Overview
 
-Refonte visuelle du site `etienneg92i/Projet-eportfolio` (ePortfolio d'Étienne Girard).
+Refonte visuelle du site `etienneg92i/Eportfolio` (ePortfolio d'Étienne Girard).
 Le site actuel est mono-page : une route `GET /`, un template `templates/index.html`, un CSS
 maison `static/style.css`, contenu dans `content.py`.
 
@@ -294,6 +294,6 @@ d'un bloc).
 - `design/support.js` — runtime de l'outil de design, nécessaire seulement pour ouvrir les
   `.dc.html` dans un navigateur. À ne pas porter dans le dépôt.
 
-Dépôt cible : `etienneg92i/Projet-eportfolio`, branche `main`. Fichiers concernés :
+Dépôt cible : `etienneg92i/Eportfolio`, branche `main`. Fichiers concernés :
 `templates/index.html`, `static/style.css`, `content.py` (correction des `&amp;`),
 `main.py` (uniquement si on passe à cinq routes).

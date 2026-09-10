@@ -13,10 +13,6 @@ Système visuel « Modernist » dans `static/style.css` (tokens + composants),
 `content.py` reste la source unique de contenu. Pas de base de données, pas
 d'authentification.
 
-Décision de design et spec au pixel :
-[`docs/adr/0001-systeme-visuel-modernist.md`](docs/adr/0001-systeme-visuel-modernist.md)
-et [`docs/design/refonte-modernist-handoff.md`](docs/design/refonte-modernist-handoff.md).
-
 - **Contenu du site** : `content.py` (profil, compétences, projets, expériences,
   formations). C'est la source unique de vérité — éditer ce fichier puis commiter.
 - **Lancer en local** : `conda activate data_manipulation` puis `uvicorn main:app --reload`
@@ -36,7 +32,7 @@ clone) active `.githooks/pre-commit`.
 
 ### Issue tracker
 
-Issues and specs live in GitHub Issues for `etienneg92i/Projet-eportfolio`, via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+Issues and specs live in GitHub Issues for `etienneg92i/Eportfolio`, via the `gh` CLI. See `docs/agents/issue-tracker.md`.
 
 `gh` n'est pas dans le PATH des shells outils : l'appeler par son chemin complet, `C:\Program Files\GitHub CLI\gh.exe`.
 
@@ -47,3 +43,7 @@ Default canonical vocabulary — `needs-triage`, `needs-info`, `ready-for-agent`
 ### Domain docs
 
 Single-context: one `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
+
+Décision de design et spec au pixel :
+[`docs/adr/0001-systeme-visuel-modernist.md`](docs/adr/0001-systeme-visuel-modernist.md)
+et [`docs/design/refonte-modernist-handoff.md`](docs/design/refonte-modernist-handoff.md).
