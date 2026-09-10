@@ -1,9 +1,10 @@
 __pycache__/
 *.pyc
 .pytest_cache/
-portfolio.db
-cv_preview_test.pdf
 _render.html
 .venv/
 venv/
 .env
+
+# Config perso d'outils (statusline, etc.) — non partagée
+.config/
