@@ -1,4 +1,5 @@
 import hashlib
+import json
 from pathlib import Path
 
 from fastapi import FastAPI, Request
@@ -42,6 +43,51 @@ def _css_version() -> str:
 CSS_VERSION = _css_version()
 
 
+def _person_jsonld() -> str:
+    """Donnees structurees schema.org/Person, derivees de `content.py`.
+
+    Rendu tel quel dans un <script type="application/ld+json"> du <head> :
+    on echappe `<`, `>`, `&` en \\uXXXX pour qu'aucune valeur ne puisse
+    fermer la balise ou injecter du balisage.
+    """
+    data = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": profil["nom"],
+        "jobTitle": profil["titre"],
+    }
+    if profil.get("email"):
+        data["email"] = f"mailto:{profil['email']}"
+    sameas = [profil[k] for k in ("github", "linkedin") if profil.get(k)]
+    if sameas:
+        data["sameAs"] = sameas
+    alumni = [
+        {"@type": "EducationalOrganization", "name": f["organisation"]}
+        for f in formations
+        if f.get("organisation")
+    ]
+    if alumni:
+        data["alumniOf"] = alumni
+    courant = next(
+        (
+            e
+            for e in experiences
+            if e.get("organisation") and "depuis" in e.get("periode", "").lower()
+        ),
+        None,
+    )
+    if courant:
+        data["worksFor"] = {"@type": "Organization", "name": courant["organisation"]}
+
+    # `indent` : JSON-LD lisible, et surtout aucun `}}` / `{{` collé que les
+    # controles anti-delimiteur-Jinja (tests, render.py) confondraient.
+    raw = json.dumps(data, ensure_ascii=False, indent=2)
+    return raw.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+
+
+PERSON_JSONLD = _person_jsonld()
+
+
 @app.exception_handler(404)
 async def page_introuvable(request: Request, exc):
     """Page 404 maison : header/footer et systeme visuel du site, lien retour."""
@@ -68,5 +114,6 @@ def accueil(request: Request):
             "experiences": experiences,
             "formations": formations,
             "css_version": CSS_VERSION,
+            "person_jsonld": PERSON_JSONLD,
         },
     )

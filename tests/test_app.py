@@ -5,6 +5,9 @@ externe : la page repond, contient ses cinq vues, et rend chaque entree de
 `content.py`. Ils completent le hook `verify-page-render` (qui, lui, ne verifie
 que la forme du HTML, pas le contenu).
 """
+import json
+import re
+
 import content
 from fastapi.testclient import TestClient
 from markupsafe import escape
@@ -97,6 +100,36 @@ def test_icones_et_theme_color_dans_le_head():
     assert client.get("/static/favicon.svg").status_code == 200
 
 
+def test_jsonld_person_dans_le_head():
+    html = client.get("/").text
+    m = re.search(
+        r'<script type="application/ld\+json">(.*?)</script>', html, re.S
+    )
+    assert m, "bloc JSON-LD absent du <head>"
+    brut = (
+        m.group(1)
+        .replace("\\u003c", "<")
+        .replace("\\u003e", ">")
+        .replace("\\u0026", "&")
+    )
+    data = json.loads(brut)  # doit être un JSON valide
+    assert data["@context"] == "https://schema.org"
+    assert data["@type"] == "Person"
+    assert data["name"] == content.profil["nom"]
+    assert content.profil["github"] in data["sameAs"]
+    assert content.profil["linkedin"] in data["sameAs"]
+    assert any(o["name"] == "EPF École d'ingénieurs" for o in data["alumniOf"])
+    assert data["worksFor"]["name"] == "Décathlon"
+
+
+def test_jsonld_ne_casse_pas_la_balise_script():
+    html = client.get("/").text
+    bloc = re.search(
+        r'<script type="application/ld\+json">(.*?)</script>', html, re.S
+    ).group(1)
+    assert "<" not in bloc and ">" not in bloc  # tout est échappé en \uXXXX
+
+
 def test_carte_projet_affiche_les_liens_optionnels():
     """Le champ optionnel `liens` d'un projet rend un lien ; absent, rien."""
     from jinja2 import Environment, FileSystemLoader, StrictUndefined
@@ -117,7 +150,7 @@ def test_carte_projet_affiche_les_liens_optionnels():
     }
     sans = {**base, "titre": "Q", "description": "E", "liens": []}
     html = env.get_template("index.html").render(
-        projets=[avec, sans], css_version=1, **ctx
+        projets=[avec, sans], css_version=1, person_jsonld="", **ctx
     )
     assert (
         '<a href="https://github.com/x/y" target="_blank" rel="noopener">Code source</a>'

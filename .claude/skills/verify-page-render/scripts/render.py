@@ -31,6 +31,7 @@ ctx = dict(
     experiences=content.experiences,
     formations=content.formations,
     css_version=1,
+    person_jsonld="",  # calcule dans main.py ; vide suffit pour le rendu
 )
 
 try:
