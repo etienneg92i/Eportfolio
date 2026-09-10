@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ profil.nom }} — {{ profil.titre }}</title>
     <meta name="description" content="{{ profil.presentation }}">
+    <link rel="icon" href="{{ url_for('static', path='favicon.svg') }}" type="image/svg+xml">
+    <link rel="icon" href="{{ url_for('static', path='favicon.png') }}" sizes="96x96" type="image/png">
+    <link rel="apple-touch-icon" href="{{ url_for('static', path='apple-touch-icon.png') }}">
+    <meta name="theme-color" content="#f3f2f2">
     <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}?v={{ css_version }}">
 </head>
 

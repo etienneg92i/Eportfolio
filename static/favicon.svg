@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="EG">
+  <rect width="64" height="64" fill="#201e1d"/>
+  <rect width="64" height="7" fill="#ec3013"/>
+  <text x="32" y="45" text-anchor="middle"
+        font-family="Archivo, Arial, Helvetica, sans-serif"
+        font-size="38" font-weight="800" letter-spacing="-3" fill="#f3f2f2">EG</text>
+</svg>
