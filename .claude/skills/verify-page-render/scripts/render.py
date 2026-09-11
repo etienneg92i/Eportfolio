@@ -32,6 +32,8 @@ ctx = dict(
     formations=content.formations,
     css_version=1,
     person_jsonld="",  # calcule dans main.py ; vide suffit pour le rendu
+    i18n_version=1,
+    i18n_json="{}",  # calcule dans main.py (_i18n_payload) ; vide suffit pour le rendu
 )
 
 try:
@@ -47,7 +49,7 @@ print(f"rendu -> {out}  ({len(html)} octets)")
 # La page 404 partage header/footer et le systeme visuel : elle doit rendre.
 try:
     html_404 = env.get_template("404.html").render(
-        profil=content.profil, css_version=1
+        profil=content.profil, css_version=1, i18n_version=1, i18n_json="{}"
     )
     if "{{" in html_404 or "}}" in html_404 or "Undefined" in html_404:
         print("ECHEC RENDU 404.html : delimiteur Jinja ou Undefined dans la sortie")

@@ -171,11 +171,36 @@ a:hover { color: var(--color-accent-600); }
   gap: 32px;
   min-height: 72px;
 }
+.site-header__start {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
 .brand {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
+/* Bouton de bascule FR/EN (static/i18n.js), en tete du header. */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-md);
+  padding: 7px 10px;
+}
+.lang-toggle:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.lang-toggle:active { background: color-mix(in srgb, var(--color-text) 14%, transparent); }
 .brand__name {
   font-family: var(--font-heading);
   font-weight: 800;

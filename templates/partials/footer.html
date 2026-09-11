@@ -2,7 +2,7 @@
     <div class="site-footer__inner">
         <span>&copy; 2026 {{ profil.nom }}</span>
         <span class="site-footer__links">
-            {% if profil.email %}<a href="mailto:{{ profil.email }}">E-mail</a>{% endif %}
+            {% if profil.email %}<a href="mailto:{{ profil.email }}" data-i18n="ui.email_label">E-mail</a>{% endif %}
             {% if profil.github %}<a href="{{ profil.github }}" target="_blank" rel="noopener">GitHub</a>{% endif %}
             {% if profil.linkedin %}<a href="{{ profil.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>{% endif %}
         </span>

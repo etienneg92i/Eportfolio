@@ -7,6 +7,7 @@
     <title>{{ profil.nom }} — {{ profil.titre }}</title>
     <meta name="description" content="{{ profil.presentation }}">
     <script type="application/ld+json">{{ person_jsonld | safe }}</script>
+    <script type="application/json" id="i18n-data">{{ i18n_json | safe }}</script>
     <link rel="icon" href="{{ url_for('static', path='favicon.svg') }}" type="image/svg+xml">
     <link rel="icon" href="{{ url_for('static', path='favicon.png') }}" sizes="96x96" type="image/png">
     <link rel="apple-touch-icon" href="{{ url_for('static', path='apple-touch-icon.png') }}">
@@ -14,24 +15,27 @@
     <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}?v={{ css_version }}">
 </head>
 
-<body>
-    <a class="skip-link" href="#contenu">Aller au contenu</a>
+<body data-i18n-title="ui.title_accueil">
+    <a class="skip-link" href="#contenu" data-i18n="ui.skip_link">Aller au contenu</a>
     {# Deux premières phrases de la présentation, pour l'accroche du hero. #}
     {% set _phrases = profil.presentation.split('. ') %}
     {% set hero_pitch = (_phrases[:2] | join('. ')) ~ ('.' if _phrases | length > 2 else '') %}
 
     <header class="site-header">
         <div class="site-header__inner">
-            <div class="brand">
-                <span class="brand__name">{{ profil.nom }}</span>
-                <span class="brand__role">Data &amp; IA</span>
+            <div class="site-header__start">
+                <button type="button" id="lang-toggle" class="lang-toggle" aria-label="Switch to English">EN</button>
+                <div class="brand">
+                    <span class="brand__name">{{ profil.nom }}</span>
+                    <span class="brand__role" data-i18n="ui.brand_role">Data &amp; IA</span>
+                </div>
             </div>
             <nav class="site-nav">
-                <a class="site-nav__tab" href="#accueil" data-view="accueil" aria-current="page">Accueil</a>
-                <a class="site-nav__tab" href="#apropos" data-view="apropos">À propos</a>
-                <a class="site-nav__tab" href="#parcours" data-view="parcours">Formation &amp; projets</a>
-                <a class="site-nav__tab" href="#experience" data-view="experience">Expérience</a>
-                <a class="site-nav__tab" href="#contact" data-view="contact">Contact</a>
+                <a class="site-nav__tab" href="#accueil" data-view="accueil" aria-current="page" data-i18n="ui.nav_accueil">Accueil</a>
+                <a class="site-nav__tab" href="#apropos" data-view="apropos" data-i18n="ui.nav_apropos">À propos</a>
+                <a class="site-nav__tab" href="#parcours" data-view="parcours" data-i18n="ui.nav_parcours">Formation &amp; projets</a>
+                <a class="site-nav__tab" href="#experience" data-view="experience" data-i18n="ui.nav_experience">Expérience</a>
+                <a class="site-nav__tab" href="#contact" data-view="contact" data-i18n="ui.nav_contact">Contact</a>
             </nav>
         </div>
     </header>
@@ -45,11 +49,11 @@
                         <div class="hero__text">
                             <span class="hero__kicker">Portfolio 2026</span>
                             {# Traitement typographique du titre, cf. design handoff. #}
-                            <h1 class="hero__title">Data Scientist<br><span class="accent">chez Décathlon</span></h1>
-                            <p class="hero__pitch">{{ hero_pitch }}</p>
+                            <h1 class="hero__title">Data Scientist<br><span class="accent" data-i18n="ui.hero_at_decathlon">chez Décathlon</span></h1>
+                            <p class="hero__pitch" data-i18n="profil.hero_pitch">{{ hero_pitch }}</p>
                             <div class="hero__actions">
-                                <a href="#parcours" data-view="parcours" class="btn btn-primary">Voir les projets</a>
-                                <a href="#contact" data-view="contact" class="btn btn-secondary">Me contacter</a>
+                                <a href="#parcours" data-view="parcours" class="btn btn-primary" data-i18n="ui.cta_projects">Voir les projets</a>
+                                <a href="#contact" data-view="contact" class="btn btn-secondary" data-i18n="ui.cta_contact">Me contacter</a>
                             </div>
                         </div>
                         <div class="hero__media">
@@ -69,8 +73,8 @@
                     <div class="facts__grid">
                         {% for fait in faits %}
                         <div class="fact">
-                            <span class="fact__label">{{ fait.libelle }}</span>
-                            <span class="fact__value">{{ fait.valeur }}</span>
+                            <span class="fact__label" data-i18n="faits.{{ loop.index0 }}.libelle">{{ fait.libelle }}</span>
+                            <span class="fact__value" data-i18n="faits.{{ loop.index0 }}.valeur">{{ fait.valeur }}</span>
                         </div>
                         {% endfor %}
                     </div>
@@ -79,14 +83,15 @@
 
             <div class="skills">
                 <div class="container container--pad">
-                    <h2 class="eyebrow">Compétences</h2>
+                    <h2 class="eyebrow" data-i18n="ui.skills_heading">Compétences</h2>
                     <div class="skills__grid">
                         {% for groupe in competences %}
+                        {% set c_idx = loop.index0 %}
                         <div class="skill-group">
-                            <h3 class="skill-group__name">{{ groupe.categorie }}</h3>
+                            <h3 class="skill-group__name" data-i18n="competences.{{ c_idx }}.categorie">{{ groupe.categorie }}</h3>
                             <ul class="dash-list">
                                 {% for item in groupe['items'] %}
-                                <li>{{ item }}</li>
+                                <li data-i18n="competences.{{ c_idx }}.items.{{ loop.index0 }}">{{ item }}</li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -99,42 +104,42 @@
         <!-- ══ À propos ═════════════════════════════════════════════════════ -->
         <section class="view" id="apropos" data-view="apropos">
             <div class="container container--view">
-                <span class="view__eyebrow">À propos</span>
-                <h1 class="view__title">Profil</h1>
-                <p class="about__lead">{{ profil.presentation }}</p>
+                <span class="view__eyebrow" data-i18n="ui.about_eyebrow">À propos</span>
+                <h1 class="view__title" data-i18n="ui.about_title">Profil</h1>
+                <p class="about__lead" data-i18n="profil.presentation">{{ profil.presentation }}</p>
 
                 <div class="about__grid">
                     <div class="about__col">
-                        <h2 class="eyebrow">Langues</h2>
+                        <h2 class="eyebrow" data-i18n="ui.languages_heading">Langues</h2>
                         <ul class="lang-list">
                             {% for langue in langues %}
                             <li>
-                                <span class="lang-list__name">{{ langue.langue }}</span>
-                                <span class="lang-list__level">{{ langue.niveau }}</span>
+                                <span class="lang-list__name" data-i18n="langues.{{ loop.index0 }}.langue">{{ langue.langue }}</span>
+                                <span class="lang-list__level" data-i18n="langues.{{ loop.index0 }}.niveau">{{ langue.niveau }}</span>
                             </li>
                             {% endfor %}
                         </ul>
                     </div>
                     <div class="about__col about__col--interets">
-                        <h2 class="eyebrow">Centres d'intérêt</h2>
+                        <h2 class="eyebrow" data-i18n="ui.interests_heading">Centres d'intérêt</h2>
                         <ul class="dash-list">
                             {% for interet in interets %}
-                            <li>{{ interet }}</li>
+                            <li data-i18n="interets.{{ loop.index0 }}">{{ interet }}</li>
                             {% endfor %}
                         </ul>
                     </div>
                     <div class="about__col">
-                        <h2 class="eyebrow">Coordonnées</h2>
+                        <h2 class="eyebrow" data-i18n="ui.contact_details_heading">Coordonnées</h2>
                         <ul class="contact-list">
                             {% if profil.localisation %}
                             <li>
-                                <span class="contact-list__label">Localisation</span>
+                                <span class="contact-list__label" data-i18n="ui.location_label">Localisation</span>
                                 <span class="contact-list__value">{{ profil.localisation }}</span>
                             </li>
                             {% endif %}
                             {% if profil.email %}
                             <li>
-                                <span class="contact-list__label">E-mail</span>
+                                <span class="contact-list__label" data-i18n="ui.email_label">E-mail</span>
                                 <a class="contact-list__value" href="mailto:{{ profil.email }}">{{ profil.email }}</a>
                             </li>
                             {% endif %}
@@ -159,58 +164,60 @@
         <!-- ══ Formation & projets ═════════════════════════════════════════ -->
         <section class="view" id="parcours" data-view="parcours">
             <div class="container container--view">
-                <span class="view__eyebrow">Parcours</span>
-                <h1 class="view__title">Formation<br>&amp; projets</h1>
+                <span class="view__eyebrow" data-i18n="ui.parcours_eyebrow">Parcours</span>
+                <h1 class="view__title"><span data-i18n="ui.parcours_title_1">Formation</span><br>&amp; <span data-i18n="ui.parcours_title_2">projets</span></h1>
 
-                <h2 class="eyebrow">Formations</h2>
+                <h2 class="eyebrow" data-i18n="ui.formations_heading">Formations</h2>
                 <div class="entries entries--gap">
                     {% for formation in formations %}
+                    {% set f_idx = loop.index0 %}
                     <article class="entry">
                         <div>
                             {% if formation.logo %}<img class="entry__logo" src="{{ url_for('static', path=formation.logo) }}" alt="{{ formation.organisation }}" loading="lazy">{% endif %}
-                            <p class="entry__period">{{ formation.periode }}</p>
+                            <p class="entry__period" data-i18n="formations.{{ f_idx }}.periode">{{ formation.periode }}</p>
                             {% if formation.organisation %}<p class="entry__org">{{ formation.organisation }}</p>{% endif %}
-                            {% if formation.lieu %}<p class="entry__place">{{ formation.lieu }}</p>{% endif %}
+                            {% if formation.lieu %}<p class="entry__place" data-i18n="formations.{{ f_idx }}.lieu">{{ formation.lieu }}</p>{% endif %}
                         </div>
                         <div>
-                            <h3 class="entry__role">{{ formation.titre }}</h3>
-                            <p class="entry__desc">{{ formation.description }}</p>
+                            <h3 class="entry__role" data-i18n="formations.{{ f_idx }}.titre">{{ formation.titre }}</h3>
+                            <p class="entry__desc" data-i18n="formations.{{ f_idx }}.description">{{ formation.description }}</p>
                         </div>
                     </article>
                     {% else %}
-                    <p>Aucune formation pour le moment.</p>
+                    <p data-i18n="ui.no_formation">Aucune formation pour le moment.</p>
                     {% endfor %}
                 </div>
 
-                <h2 class="eyebrow">Projets</h2>
+                <h2 class="eyebrow" data-i18n="ui.projects_heading">Projets</h2>
                 <div class="projects">
                     {% for projet in projets %}
+                    {% set p_idx = loop.index0 %}
                     {% set meta = [projet.cadre, projet.organisation, projet.periode] | select | list %}
                     <article class="project">
                         <div>
-                            <h2 class="project__name">{{ projet.titre }}</h2>
-                            {% if meta %}<p class="project__meta">{{ meta | join(' · ') }}</p>{% endif %}
+                            <h2 class="project__name" data-i18n="projets.{{ p_idx }}.titre">{{ projet.titre }}</h2>
+                            {% if meta %}<p class="project__meta" data-i18n="projets.{{ p_idx }}.meta">{{ meta | join(' · ') }}</p>{% endif %}
                         </div>
                         <div>
-                            <p class="project__desc">{{ projet.description }}</p>
+                            <p class="project__desc" data-i18n="projets.{{ p_idx }}.description">{{ projet.description }}</p>
                             {% if projet.liens %}
                             <ul class="project__links">
                                 {% for lien in projet.liens %}
-                                <li><a href="{{ lien.url }}" target="_blank" rel="noopener">{{ lien.libelle }}</a></li>
+                                <li><a href="{{ lien.url }}" target="_blank" rel="noopener" data-i18n="projets.{{ p_idx }}.liens.{{ loop.index0 }}.libelle">{{ lien.libelle }}</a></li>
                                 {% endfor %}
                             </ul>
                             {% endif %}
                             {% if projet.technos %}
                             <ul class="project__tags">
                                 {% for techno in projet.technos %}
-                                <li class="tag tag-outline">{{ techno }}</li>
+                                <li class="tag tag-outline" data-i18n="projets.{{ p_idx }}.technos.{{ loop.index0 }}">{{ techno }}</li>
                                 {% endfor %}
                             </ul>
                             {% endif %}
                         </div>
                     </article>
                     {% else %}
-                    <p>Aucun projet pour le moment.</p>
+                    <p data-i18n="ui.no_project">Aucun projet pour le moment.</p>
                     {% endfor %}
                 </div>
             </div>
@@ -219,25 +226,26 @@
         <!-- ══ Expérience ═══════════════════════════════════════════════════ -->
         <section class="view" id="experience" data-view="experience">
             <div class="container container--view">
-                <span class="view__eyebrow">Parcours</span>
-                <h1 class="view__title">Expérience</h1>
+                <span class="view__eyebrow" data-i18n="ui.parcours_eyebrow">Parcours</span>
+                <h1 class="view__title" data-i18n="ui.experience_title">Expérience</h1>
 
                 <div class="entries">
                     {% for experience in experiences %}
+                    {% set e_idx = loop.index0 %}
                     <article class="entry">
                         <div>
                             {% if experience.logo %}<img class="entry__logo" src="{{ url_for('static', path=experience.logo) }}" alt="{{ experience.organisation }}" loading="lazy">{% endif %}
-                            <p class="entry__period">{{ experience.periode }}</p>
+                            <p class="entry__period" data-i18n="experiences.{{ e_idx }}.periode">{{ experience.periode }}</p>
                             {% if experience.organisation %}<p class="entry__org">{{ experience.organisation }}</p>{% endif %}
-                            {% if experience.lieu %}<p class="entry__place">{{ experience.lieu }}</p>{% endif %}
+                            {% if experience.lieu %}<p class="entry__place" data-i18n="experiences.{{ e_idx }}.lieu">{{ experience.lieu }}</p>{% endif %}
                         </div>
                         <div>
-                            <h3 class="entry__role">{{ experience.titre }}</h3>
-                            <p class="entry__desc">{{ experience.description }}</p>
+                            <h3 class="entry__role" data-i18n="experiences.{{ e_idx }}.titre">{{ experience.titre }}</h3>
+                            <p class="entry__desc" data-i18n="experiences.{{ e_idx }}.description">{{ experience.description }}</p>
                         </div>
                     </article>
                     {% else %}
-                    <p>Aucune expérience pour le moment.</p>
+                    <p data-i18n="ui.no_experience">Aucune expérience pour le moment.</p>
                     {% endfor %}
                 </div>
             </div>
@@ -247,13 +255,13 @@
         <section class="view" id="contact" data-view="contact">
             <div class="container container--contact">
                 <span class="view__eyebrow">Contact</span>
-                <h1 class="view__title">Restons<br>en contact</h1>
-                <p class="contact__lead">Data Scientist en alternance chez Décathlon, équipe Finance Data. Une question, un échange&nbsp;? Écrivez-moi.</p>
+                <h1 class="view__title"><span data-i18n="ui.contact_title_1">Restons</span><br><span data-i18n="ui.contact_title_2">en contact</span></h1>
+                <p class="contact__lead" data-i18n="ui.contact_lead">Data Scientist en alternance chez Décathlon, équipe Finance Data. Une question, un échange&nbsp;? Écrivez-moi.</p>
 
                 <div class="contact-band">
                     {% if profil.email %}
                     <div class="contact-band__cell">
-                        <p class="contact-band__label">E-mail</p>
+                        <p class="contact-band__label" data-i18n="ui.email_label">E-mail</p>
                         <a class="contact-band__value" href="mailto:{{ profil.email }}">{{ profil.email }}</a>
                     </div>
                     {% endif %}
@@ -271,7 +279,7 @@
                     {% endif %}
                     {% if profil.localisation %}
                     <div class="contact-band__cell">
-                        <p class="contact-band__label">Localisation</p>
+                        <p class="contact-band__label" data-i18n="ui.location_label">Localisation</p>
                         <p class="contact-band__value">{{ profil.localisation }}</p>
                     </div>
                     {% endif %}
@@ -282,6 +290,7 @@
 
     {% include "partials/footer.html" %}
 
+    <script src="{{ url_for('static', path='i18n.js') }}?v={{ i18n_version }}"></script>
     <script>
         (function () {
             var VIEWS = ['accueil', 'apropos', 'parcours', 'experience', 'contact'];

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page introuvable — {{ profil.nom }}</title>
     <meta name="robots" content="noindex">
+    <script type="application/json" id="i18n-data">{{ i18n_json | safe }}</script>
     <link rel="icon" href="{{ url_for('static', path='favicon.svg') }}" type="image/svg+xml">
     <link rel="icon" href="{{ url_for('static', path='favicon.png') }}" sizes="96x96" type="image/png">
     <link rel="apple-touch-icon" href="{{ url_for('static', path='apple-touch-icon.png') }}">
@@ -13,33 +14,38 @@
     <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}?v={{ css_version }}">
 </head>
 
-<body>
-    <a class="skip-link" href="#contenu">Aller au contenu</a>
+<body data-i18n-title="ui.title_404">
+    <a class="skip-link" href="#contenu" data-i18n="ui.skip_link">Aller au contenu</a>
 
     <header class="site-header">
         <div class="site-header__inner">
-            <a class="brand" href="/">
-                <span class="brand__name">{{ profil.nom }}</span>
-                <span class="brand__role">Data &amp; IA</span>
-            </a>
+            <div class="site-header__start">
+                <button type="button" id="lang-toggle" class="lang-toggle" aria-label="Switch to English">EN</button>
+                <a class="brand" href="/">
+                    <span class="brand__name">{{ profil.nom }}</span>
+                    <span class="brand__role" data-i18n="ui.brand_role">Data &amp; IA</span>
+                </a>
+            </div>
         </div>
     </header>
 
     <main id="contenu" tabindex="-1">
         <section class="view is-active">
             <div class="container container--view error-404">
-                <span class="view__eyebrow">Erreur 404</span>
-                <h1 class="view__title">Page<br>introuvable</h1>
-                <p class="error-404__text">
+                <span class="view__eyebrow" data-i18n="ui.error_404_eyebrow">Erreur 404</span>
+                <h1 class="view__title"><span data-i18n="ui.error_404_title_1">Page</span><br><span data-i18n="ui.error_404_title_2">introuvable</span></h1>
+                <p class="error-404__text" data-i18n="ui.error_404_text">
                     Cette adresse ne mène nulle part — la page a peut-être été déplacée,
                     ou n'a jamais existé.
                 </p>
-                <a href="/" class="btn btn-primary">Retour à l'accueil</a>
+                <a href="/" class="btn btn-primary" data-i18n="ui.back_home">Retour à l'accueil</a>
             </div>
         </section>
     </main>
 
     {% include "partials/footer.html" %}
+
+    <script src="{{ url_for('static', path='i18n.js') }}?v={{ i18n_version }}"></script>
 </body>
 
 </html>

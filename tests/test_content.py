@@ -63,3 +63,27 @@ def test_lien_sans_url_est_rejete(monkeypatch):
     monkeypatch.setattr(content, "projets", [projet])
     with pytest.raises(ValueError, match="liens"):
         content._valider()
+
+
+def test_traduction_en_du_repo_est_valide():
+    # Ne doit rien lever : la traduction reellement commitee est en phase
+    # avec le contenu francais (memes listes, meme longueur).
+    content._valider_tout()
+
+
+def test_traduction_en_avec_une_entree_projet_en_moins_est_rejetee(monkeypatch):
+    en = dict(content.traduction_en)
+    en["projets"] = en["projets"][:1]
+    monkeypatch.setattr(content, "traduction_en", en)
+    with pytest.raises(ValueError, match="projets"):
+        content._valider_tout()
+
+
+def test_traduction_en_avec_un_libelle_ui_manquant_est_rejetee(monkeypatch):
+    en = dict(content.traduction_en)
+    ui = dict(en["ui"])
+    del ui["nav_accueil"]
+    en["ui"] = ui
+    monkeypatch.setattr(content, "traduction_en", en)
+    with pytest.raises(ValueError, match="ui"):
+        content._valider_tout()

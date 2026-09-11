@@ -83,7 +83,7 @@ def test_url_css_porte_l_empreinte_de_version():
 
 def test_lien_d_evitement_pointe_le_contenu():
     html = client.get("/").text
-    assert '<a class="skip-link" href="#contenu">' in html
+    assert '<a class="skip-link" href="#contenu"' in html
     assert 'id="contenu"' in html
 
 
@@ -150,10 +150,12 @@ def test_carte_projet_affiche_les_liens_optionnels():
     }
     sans = {**base, "titre": "Q", "description": "E", "liens": []}
     html = env.get_template("index.html").render(
-        projets=[avec, sans], css_version=1, person_jsonld="", **ctx
+        projets=[avec, sans], css_version=1, person_jsonld="",
+        i18n_version=1, i18n_json="{}", **ctx
     )
     assert (
-        '<a href="https://github.com/x/y" target="_blank" rel="noopener">Code source</a>'
+        '<a href="https://github.com/x/y" target="_blank" rel="noopener"'
+        ' data-i18n="projets.0.liens.0.libelle">Code source</a>'
         in html
     )
     assert html.count('class="project__links"') == 1  # `liens` vide -> pas de bloc
@@ -168,6 +170,44 @@ def test_page_404_personnalisee():
     assert 'href="/"' in html  # lien retour vers l'accueil
     assert rendu(content.profil["nom"]) in html  # header/footer partages
     assert "{{" not in html and "}}" not in html
+
+
+def test_bouton_de_langue_est_present():
+    html = client.get("/").text
+    assert 'id="lang-toggle"' in html
+    assert 'class="lang-toggle"' in html
+
+
+def test_bloc_i18n_est_du_json_valide_et_complet():
+    html = client.get("/").text
+    m = re.search(
+        r'<script type="application/json" id="i18n-data">(.*?)</script>', html, re.S
+    )
+    assert m, "bloc i18n-data absent du <head>"
+    brut = (
+        m.group(1)
+        .replace("\\u003c", "<")
+        .replace("\\u003e", ">")
+        .replace("\\u0026", "&")
+    )
+    data = json.loads(brut)  # doit être un JSON valide
+    assert data["ui"]["nav_accueil"] == "Home"
+    assert data["ui"]["title_accueil"] == f"{content.profil['nom']} — {data['profil']['titre']}"
+    assert len(data["projets"]) == len(content.projets)
+    assert len(data["experiences"]) == len(content.experiences)
+    assert len(data["formations"]) == len(content.formations)
+
+
+def test_script_i18n_js_est_servi():
+    r = client.get("/static/i18n.js")
+    assert r.status_code == 200
+    assert "lang-toggle" in r.text
+
+
+def test_page_404_a_aussi_le_bouton_et_le_bloc_i18n():
+    html = client.get("/cette-page-nexiste-pas").text
+    assert 'id="lang-toggle"' in html
+    assert 'id="i18n-data"' in html
 
 
 def test_portrait_servi_en_webp_avec_fallback():
